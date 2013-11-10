@@ -26,11 +26,13 @@ De naam GIT is geen afkorting, maar een verwijzing naar Linus zelf: het is slang
 
 ## Interne werking ##
 
-Je bestanden worden opgeslaan in een repository. Deze repository bevat informatie over de inhoud van de bestanden, hun naam, locatie en de historiek. 
+Je bestanden worden opgeslaan in een repository. Deze repository bevat informatie over de inhoud van de bestanden, hun naam, locatie en de historiek.
 
-Van alle files in de repository wordt zowel de naam van de file als de inhoud gehashed via SHA1. Deze 2 hashcodes worden gebruikt om de naam & inhoud van de files op een snelle manier op te halen. Dit zorgt er ook voor, dat identieke files of dezelfde filenames niet dubbel worden opgeslaan, maar gewoon via dezelfde hashcode verwijzen naar dezelfde informatie.
+* de inhoud van bestanden wordt opgeslaan in blob objecten
+* de historiek wordt bijgehouden in commit objecten
+* de structuur wordt bijgehouden in tree objecten
 
-De kans dat twee verschillende bestandsnamen of twee verschillende inhouden van bestanden dezelfde hash code genereren is verwaarloosbaar: dit bedraagt slechts 1/2<sup>160</sup>.
+Wanneer je meerdere files hebt met dezelfde inhoud, dan zal in de tree meerdere keren verwezen worden naar hetzelfde blob object, waardoor er plaats bespaard wordt.
 
 ## Een eerste repository
 
