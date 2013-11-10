@@ -729,4 +729,3 @@ Dit is een basis introductie om je op weg te helpen met git. Er is nog heel wat 
 * [https://help.github.com/](https://help.github.com/)
 * [https://www.atlassian.com/git/](https://www.atlassian.com/git/)
 * [http://git-scm.com/book](http://git-scm.com/book)
->>>>>>> eerste versie tutorial
