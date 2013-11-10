@@ -726,6 +726,7 @@ Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
 
 Dit is een basis introductie om je op weg te helpen met git. Er is nog heel wat meer mogelijk met git & github. Meer informatie & tutorials kun je onder andere vinden op volgende locaties:
 
-* [https://help.github.com/](https://help.github.com/)
+* [http://rypress.com/tutorials/git/index.html](http://rypress.com/tutorials/git/index.html)
 * [https://www.atlassian.com/git/](https://www.atlassian.com/git/)
+* [https://help.github.com/](https://help.github.com/)
 * [http://git-scm.com/book](http://git-scm.com/book)
