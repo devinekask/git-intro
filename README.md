@@ -724,6 +724,158 @@ Nu kan je opnieuw pushen naar de remote:
 
 Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
 
+## Bestanden negeren
+Wanneer je zal samenwerken aan projecten, zal je - afhankelijk van je IDE - files gaan krijgen met lokale settings. Deze files zijn enkel relevant voor jouw computer, maar niet voor de mensen waarmee je samenwerkt. Het is niet de bedoeling om die IDE settings files te gaan sharen via GitHub.
+
+Als voorbeeld werken we met een IntelliJ project. We zullen "per ongeluk" lokale settings committen, en kijken om dit nadien recht te zetten.
+
+### Opzetten git repository
+Maak een nieuwe repository aan op GitHub en clone deze op jouw computer:
+
+	$ git clone https://github.com/devinehowest/git-demo.git
+
+Maak daarna in deze map een IntelliJ project aan, met een Flash Module. Compile & run dit project, zodat je ook een output folder met swf krijgt.
+
+Commit & push deze wijzigingen naar GitHub
+
+	$ git add .
+	$ git commit -m "initial project"
+	[master (root-commit) bd1d298] initial project
+	 14 files changed, 982 insertions(+)
+	 create mode 100644 .idea/.name
+	 create mode 100644 .idea/compiler.xml
+	 create mode 100644 .idea/encodings.xml
+	 create mode 100644 .idea/flexCompiler.xml
+	 create mode 100644 .idea/misc.xml
+	 create mode 100644 .idea/modules.xml
+	 create mode 100644 .idea/scopes/scope_settings.xml
+	 create mode 100644 .idea/vcs.xml
+	 create mode 100644 .idea/workspace.xml
+	 create mode 100644 DemoProject/DemoProject.iml
+	 create mode 100644 DemoProject/src/DemoProject.as
+	 create mode 100644 out/production/DemoProject/DemoProject-android-descriptor.xml
+	 create mode 100644 out/production/DemoProject/DemoProject-ios-descriptor.xml
+	 create mode 100644 out/production/DemoProject/DemoProject.swf
+	
+	$ git push -u origin master
+	Counting objects: 23, done.
+	Delta compression using up to 8 threads.
+	Compressing objects: 100% (18/18), done.
+	Writing objects: 100% (23/23), 10.97 KiB | 0 bytes/s, done.
+	Total 23 (delta 1), reused 0 (delta 0)
+	To https://github.com/devinehowest/git-demo.git
+	 * [new branch]      master -> master
+	Branch master set up to track remote branch master from origin.
+
+### Bestanden wissen
+
+Je hebt nu het volledige project, inclusief de settings op GitHub gepushed.
+
+Dit zal voor problemen zorgen bij andere personen die het project willen runnen: zij zullen met andere paden / settings zitten op hun computer.
+
+In het geval van IntelliJ gaat dit om het .iml bestand en de .idea map. We zullen deze wissen in de repository, en willen niet dat deze in de toekomst nog getracked worden.
+
+Sluit het IntelliJ bestand & wis de te negeren bestanden lokaal, via het git rm commando. In het geval van mappen, zul je recursief moeten werken:
+
+	$ git rm -r --cached .idea/
+	rm '.idea/.name'
+	rm '.idea/compiler.xml'
+	rm '.idea/encodings.xml'
+	rm '.idea/flexCompiler.xml'
+	rm '.idea/misc.xml'
+	rm '.idea/modules.xml'
+	rm '.idea/scopes/scope_settings.xml'
+	rm '.idea/vcs.xml'
+	rm '.idea/workspace.xml'
+	$ git rm DemoProject/DemoProject.iml
+	rm 'DemoProject/DemoProject.iml'
+
+Als je project & module in dezelfde map staat, dan zal het tweede remove commando de iml file in dezelfde map moeten passen. Pas dit commando dus aan indien dit het geval is.
+
+Een git status geeft nu het volgende resultaat:
+
+	$ git status
+	# On branch master
+	# Changes to be committed:
+	#   (use "git reset HEAD <file>..." to unstage)
+	#
+	#	deleted:    .idea/.name
+	#	deleted:    .idea/compiler.xml
+	#	deleted:    .idea/encodings.xml
+	#	deleted:    .idea/flexCompiler.xml
+	#	deleted:    .idea/misc.xml
+	#	deleted:    .idea/modules.xml
+	#	deleted:    .idea/scopes/scope_settings.xml
+	#	deleted:    .idea/vcs.xml
+	#	deleted:    .idea/workspace.xml
+	#	deleted:    DemoProject/DemoProject.iml
+
+Add, commit & push deze deletes nu naar de remote:
+
+	$ git add -u
+	$ git commit -m "removed settings files"
+	[master eb72040] removed settings files
+	 10 files changed, 465 deletions(-)
+	 delete mode 100644 .idea/.name
+	 delete mode 100644 .idea/compiler.xml
+	 delete mode 100644 .idea/encodings.xml
+	 delete mode 100644 .idea/flexCompiler.xml
+	 delete mode 100644 .idea/misc.xml
+	 delete mode 100644 .idea/modules.xml
+	 delete mode 100644 .idea/scopes/scope_settings.xml
+	 delete mode 100644 .idea/vcs.xml
+	 delete mode 100644 .idea/workspace.xml
+	 delete mode 100644 DemoProject/DemoProject.iml
+	$ git push
+	Counting objects: 5, done.
+	Delta compression using up to 8 threads.
+	Compressing objects: 100% (2/2), done.
+	Writing objects: 100% (3/3), 310 bytes | 0 bytes/s, done.
+	Total 3 (delta 0), reused 0 (delta 0)
+	To https://github.com/devinehowest/git-demo.git
+	   bd1d298..eb72040  master -> master
+
+### .gitignore
+We zullen nu specifieren welke files we in de toekomst niet meer willen tracken. Dit kan mbv een .gitignore file. Dit is een tekstbestand in je repository dat specifieert welke bestanden en mappen genegeerd mogen worden door git.
+
+Maak een nieuw bestand aan met de naam ".gitignore" (zonder de quotes weliswaar) in de root van je repository. Geef dit de volgende inhoud:
+
+	.idea/
+	*.iml
+
+Dit zorgt ervoor dat alle .idea mappen en alle bestanden met de extensie .iml in deze map & alle submappen genegeerd worden in de toekomst. Let wel: deze bestanden & mappen mogen nog niet getracked worden! Wij hebben daarvoor gezorgd, door ze in de voorgaande stap te removen via `git rm`.
+
+Add, commit & push naar GitHub:
+
+	$ git add .
+	$ git commit -m "added .gitignore"
+	[master af238c5] added .gitignore
+	 1 file changed, 2 insertions(+)
+	 create mode 100644 .gitignore
+	$ git push
+	Counting objects: 4, done.
+	Delta compression using up to 8 threads.
+	Compressing objects: 100% (2/2), done.
+	Writing objects: 100% (3/3), 327 bytes | 0 bytes/s, done.
+	Total 3 (delta 0), reused 0 (delta 0)
+	To https://github.com/devinehowest/git-demo.git
+	   eb72040..af238c5  master -> master
+
+### project opnieuw inladen in IntelliJ
+Het is een goed idee om de volledige map nu te wissen, en de repository opnieuw te clonen. Zo start je in dezelfde situatie als iemand die het project ook wil runnen.
+
+Wis dus de volledige map, en clone deze opnieuw:
+
+	$ git clone https://github.com/devinehowest/git-demo.git
+
+Open nu IntelliJ opnieuw, en kies ervoor om een nieuw project (!!) aan te maken (dus niet import, of open). Doorloop de wizard en selecteer de juiste project map en (indien deze anders is) de juiste module map.
+
+IntelliJ zal waarschijnlijk je opstartbestand overschrijven. Je kan dit gewoon terugzetten via `git checkout` in je command line:
+
+	$ git checkout src/Main.as
+
+Vanaf nu zullen je project files (.idea, .iml) niet mee gecommit worden, doordat deze in de .gitignore vermeld staan en niet getracked worden. Zo kan elke user met zijn eigen configuratie werken.
+
 ## Git Resources
 
 Dit is een basis introductie om je op weg te helpen met git. Er is nog heel wat meer mogelijk met git & github. Meer informatie & tutorials kun je onder andere vinden op volgende locaties:
