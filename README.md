@@ -725,72 +725,75 @@ Nu kan je opnieuw pushen naar de remote:
 Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
 
 ## Bestanden negeren
-Wanneer je zal samenwerken aan projecten, zal je - afhankelijk van je IDE - files gaan krijgen met lokale settings. Deze files zijn enkel relevant voor jouw computer, maar niet voor de mensen waarmee je samenwerkt. Het is niet de bedoeling om die IDE settings files te gaan sharen via GitHub.
+Wanneer je zal samenwerken aan projecten, zal je - afhankelijk van je IDE - files gaan krijgen met lokale settings, of vendor dependencies (node_modules, bower_components). Deze files zijn enkel relevant voor jouw computer, maar niet voor de mensen waarmee je samenwerkt. Het is niet de bedoeling om die files te gaan sharen via GitHub.
 
-Als voorbeeld werken we met een IntelliJ project. We zullen "per ongeluk" lokale settings committen, en kijken om dit nadien recht te zetten.
+Als voorbeeld werken we met een gulp project. We zullen "per ongeluk" node_modules committen, en kijken om dit nadien recht te zetten.
 
 ### Opzetten git repository
 Maak een nieuwe repository aan op GitHub en clone deze op jouw computer:
 
 	$ git clone https://github.com/devinehowest/git-demo.git
 
-Maak daarna in deze map een IntelliJ project aan, met een Flash Module. Compile & run dit project, zodat je ook een output folder met swf krijgt.
+Maak daarna in deze map een werkend gulp project aan. Je kan uiteraard een kopie nemen van een vorig project en de dependencies installeren via `npm install`.
 
 Commit & push deze wijzigingen naar GitHub
 
-	$ git add .
 	$ git commit -m "initial project"
-	[master (root-commit) bd1d298] initial project
-	 14 files changed, 982 insertions(+)
-	 create mode 100644 .idea/.name
-	 create mode 100644 .idea/compiler.xml
-	 create mode 100644 .idea/encodings.xml
-	 create mode 100644 .idea/flexCompiler.xml
-	 create mode 100644 .idea/misc.xml
-	 create mode 100644 .idea/modules.xml
-	 create mode 100644 .idea/scopes/scope_settings.xml
-	 create mode 100644 .idea/vcs.xml
-	 create mode 100644 .idea/workspace.xml
-	 create mode 100644 DemoProject/DemoProject.iml
-	 create mode 100644 DemoProject/src/DemoProject.as
-	 create mode 100644 out/production/DemoProject/DemoProject-android-descriptor.xml
-	 create mode 100644 out/production/DemoProject/DemoProject-ios-descriptor.xml
-	 create mode 100644 out/production/DemoProject/DemoProject.swf
+	[master (root-commit) 0b95e12] initial project
+	 4284 files changed, 770604 insertions(+)
+	 create mode 100644 css/style.css
+	 create mode 100644 gulpfile.js
+	 create mode 100644 images/80_Big-Mac.jpg
+	 create mode 100644 images/80_Cheeseburger.jpg
+	 create mode 100644 images/80_Hamburger.jpg
+	 create mode 100644 images/80_McDouble.jpg
+	 create mode 100644 images/80_Quarter-Pounder-with-Cheese.jpg
+	 create mode 100644 index.html
+	 create mode 100644 js/bean.min.js
+	 create mode 100755 js/script.dist.js
+	 create mode 100755 js/script.dist.js.map
+	 create mode 100644 js/src/classes/Gallery.js
+	 create mode 100644 js/src/classes/GalleryItem.js
+	 create mode 100644 js/src/script.js
+	 create mode 120000 node_modules/.bin/browserify
+	 create mode 120000 node_modules/.bin/gulp
+	 create mode 100644 node_modules/browserify/.npmignore
+	 create mode 100644 node_modules/browserify/.travis.yml
+	 create mode 100644 node_modules/browserify/LICENSE
+	 create mode 100644 node_modules/browserify/bin/advanced.txt
+	 create mode 100644 node_modules/browserify/bin/args.js
+	 create mode 100755 node_modules/browserify/bin/cmd.js
+	
+	 ...
 	
 	$ git push -u origin master
-	Counting objects: 23, done.
+	Counting objects: 3373, done.
 	Delta compression using up to 8 threads.
-	Compressing objects: 100% (18/18), done.
-	Writing objects: 100% (23/23), 10.97 KiB | 0 bytes/s, done.
-	Total 23 (delta 1), reused 0 (delta 0)
+	Compressing objects: 100% (2896/2896), done.
+	Writing objects: 100% (3373/3373), 4.38 MiB | 219.00 KiB/s, done.
+	Total 3373 (delta 447), reused 0 (delta 0)
 	To https://github.com/devinehowest/git-demo.git
 	 * [new branch]      master -> master
 	Branch master set up to track remote branch master from origin.
 
 ### Bestanden wissen
 
-Je hebt nu het volledige project, inclusief de settings op GitHub gepushed.
+Je hebt nu het volledige project, inclusief de node_modules op GitHub gepushed.
 
-Dit zal voor problemen zorgen bij andere personen die het project willen runnen: zij zullen met andere paden / settings zitten op hun computer.
+Dit is overkill, het is niet nodig om de volledige dependency tree mee op te slaan in je git repository. We zullen deze fout nu rechtzetten:
 
-In het geval van IntelliJ gaat dit om het .iml bestand en de .idea map. We zullen deze wissen in de repository, en willen niet dat deze in de toekomst nog getracked worden.
+	$ git rm -r --cached node_modules/
+	rm 'node_modules/.bin/browserify'
+	rm 'node_modules/.bin/gulp'
+	rm 'node_modules/browserify/.npmignore'
+	rm 'node_modules/browserify/.travis.yml'
+	rm 'node_modules/browserify/LICENSE'
+	rm 'node_modules/browserify/bin/advanced.txt'
+	rm 'node_modules/browserify/bin/args.js'
+	rm 'node_modules/browserify/bin/cmd.js'
+	...
 
-Sluit het IntelliJ bestand & wis de te negeren bestanden lokaal, via het git rm commando. In het geval van mappen, zul je recursief moeten werken:
-
-	$ git rm -r --cached .idea/
-	rm '.idea/.name'
-	rm '.idea/compiler.xml'
-	rm '.idea/encodings.xml'
-	rm '.idea/flexCompiler.xml'
-	rm '.idea/misc.xml'
-	rm '.idea/modules.xml'
-	rm '.idea/scopes/scope_settings.xml'
-	rm '.idea/vcs.xml'
-	rm '.idea/workspace.xml'
-	$ git rm DemoProject/DemoProject.iml
-	rm 'DemoProject/DemoProject.iml'
-
-Als je project & module in dezelfde map staat, dan zal het tweede remove commando de iml file in dezelfde map moeten passen. Pas dit commando dus aan indien dit het geval is.
+De --cached optie zorgt ervoor dat de file gewist word uit de repository index, maar wel blijft staan in jouw filesysteem.
 
 Een git status geeft nu het volgende resultaat:
 
@@ -799,82 +802,76 @@ Een git status geeft nu het volgende resultaat:
 	# Changes to be committed:
 	#   (use "git reset HEAD <file>..." to unstage)
 	#
-	#	deleted:    .idea/.name
-	#	deleted:    .idea/compiler.xml
-	#	deleted:    .idea/encodings.xml
-	#	deleted:    .idea/flexCompiler.xml
-	#	deleted:    .idea/misc.xml
-	#	deleted:    .idea/modules.xml
-	#	deleted:    .idea/scopes/scope_settings.xml
-	#	deleted:    .idea/vcs.xml
-	#	deleted:    .idea/workspace.xml
-	#	deleted:    DemoProject/DemoProject.iml
+	#	deleted:    node_modules/.bin/browserify
+	#	deleted:    node_modules/.bin/gulp
+	#	deleted:    node_modules/browserify/.npmignore
+	#	deleted:    node_modules/browserify/.travis.yml
+	#	deleted:    node_modules/browserify/LICENSE
+	#	deleted:    node_modules/browserify/bin/advanced.txt
+	#	deleted:    node_modules/browserify/bin/args.js
+	#	deleted:    node_modules/browserify/bin/cmd.js
+	...
 
-Add, commit & push deze deletes nu naar de remote:
+Add, commit & push nu enkel deze deletes de remote, door de flag -u te gebruiken bij je add:
 
-	$ git add -u
-	$ git commit -m "removed settings files"
-	[master eb72040] removed settings files
-	 10 files changed, 465 deletions(-)
-	 delete mode 100644 .idea/.name
-	 delete mode 100644 .idea/compiler.xml
-	 delete mode 100644 .idea/encodings.xml
-	 delete mode 100644 .idea/flexCompiler.xml
-	 delete mode 100644 .idea/misc.xml
-	 delete mode 100644 .idea/modules.xml
-	 delete mode 100644 .idea/scopes/scope_settings.xml
-	 delete mode 100644 .idea/vcs.xml
-	 delete mode 100644 .idea/workspace.xml
-	 delete mode 100644 DemoProject/DemoProject.iml
+	$ git add -u .
+	$ git commit -m "removed node_modules folder"
+	[master 62c973d] removed node_modules folder
+	 4269 files changed, 770405 deletions(-)
+	 delete mode 120000 node_modules/.bin/browserify
+	 delete mode 120000 node_modules/.bin/gulp
+	 delete mode 100644 node_modules/browserify/.npmignore
+	 delete mode 100644 node_modules/browserify/.travis.yml
+	 delete mode 100644 node_modules/browserify/LICENSE
+	 delete mode 100644 node_modules/browserify/bin/advanced.txt
+	 delete mode 100644 node_modules/browserify/bin/args.js
+	 delete mode 100755 node_modules/browserify/bin/cmd.js
+	 delete mode 100644 node_modules/browserify/bin/usage.txt
+	 ...
 	$ git push
-	Counting objects: 5, done.
+	Counting objects: 3, done.
 	Delta compression using up to 8 threads.
 	Compressing objects: 100% (2/2), done.
-	Writing objects: 100% (3/3), 310 bytes | 0 bytes/s, done.
-	Total 3 (delta 0), reused 0 (delta 0)
+	Writing objects: 100% (2/2), 244 bytes | 0 bytes/s, done.
+	Total 2 (delta 1), reused 0 (delta 0)
 	To https://github.com/devinehowest/git-demo.git
-	   bd1d298..eb72040  master -> master
+	   0b95e12..62c973d  master -> master
 
 ### .gitignore
 We zullen nu specifieren welke files we in de toekomst niet meer willen tracken. Dit kan mbv een .gitignore file. Dit is een tekstbestand in je repository dat specifieert welke bestanden en mappen genegeerd mogen worden door git.
 
 Maak een nieuw bestand aan met de naam ".gitignore" (zonder de quotes weliswaar) in de root van je repository. Geef dit de volgende inhoud:
 
-	.idea/
-	*.iml
+	node_modules/
+	bower_components/
 
-Dit zorgt ervoor dat alle .idea mappen en alle bestanden met de extensie .iml in deze map & alle submappen genegeerd worden in de toekomst. Let wel: deze bestanden & mappen mogen nog niet getracked worden! Wij hebben daarvoor gezorgd, door ze in de voorgaande stap te removen via `git rm`.
+Dit zorgt ervoor dat alle node_modules en bower_components (& al hun submappen en submappen met deze naam) genegeerd worden in de toekomst. Let wel: deze bestanden & mappen mogen nog niet getracked worden! Wij hebben daarvoor gezorgd, door ze in de voorgaande stap te removen via `git rm`.
 
 Add, commit & push naar GitHub:
 
 	$ git add .
 	$ git commit -m "added .gitignore"
-	[master af238c5] added .gitignore
+	[master 803c414] added gitignore
 	 1 file changed, 2 insertions(+)
 	 create mode 100644 .gitignore
 	$ git push
 	Counting objects: 4, done.
 	Delta compression using up to 8 threads.
 	Compressing objects: 100% (2/2), done.
-	Writing objects: 100% (3/3), 327 bytes | 0 bytes/s, done.
-	Total 3 (delta 0), reused 0 (delta 0)
+	Writing objects: 100% (3/3), 312 bytes | 0 bytes/s, done.
+	Total 3 (delta 1), reused 0 (delta 0)
 	To https://github.com/devinehowest/git-demo.git
-	   eb72040..af238c5  master -> master
+	   62c973d..803c414  master -> master
 
-### project opnieuw inladen in IntelliJ
+
+### project opnieuw opzetten
 Het is een goed idee om de volledige map nu te wissen, en de repository opnieuw te clonen. Zo start je in dezelfde situatie als iemand die het project ook wil runnen.
 
 Wis dus de volledige map, en clone deze opnieuw:
 
 	$ git clone https://github.com/devinehowest/git-demo.git
 
-Open nu IntelliJ opnieuw, en kies ervoor om een nieuw project (!!) aan te maken (dus niet import, of open). Doorloop de wizard en selecteer de juiste project map en (indien deze anders is) de juiste module map.
-
-IntelliJ zal waarschijnlijk je opstartbestand overschrijven. Je kan dit gewoon terugzetten via `git checkout` in je command line:
-
-	$ git checkout src/Main.as
-
-Vanaf nu zullen je project files (.idea, .iml) niet mee gecommit worden, doordat deze in de .gitignore vermeld staan en niet getracked worden. Zo kan elke user met zijn eigen configuratie werken.
+Je zal zien dat de node_modules (en eventueel ook bower_components) niet in de map zitten. Installeer deze alle dependencies via `npm install` (en `bower install` indien je ook gebruik maakt van bower).
 
 ## Git Resources
 
