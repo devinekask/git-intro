@@ -192,11 +192,9 @@ Nu zijn beide gestaged voor commit, en kan je met 1 commit ze loggen in de git r
 	 2 files changed, 2 insertions(+), 1 deletion(-)
 	 create mode 100644 world.txt
 
-### git add -u . ###
+### git add -A . ###
 
-We hebben al eerdere gezien dat je met `git add .` alle wijzigingen kunt stagen voor commit. Nu is het zo dat deletes (wissen van files) niet mee gestaged worden. Doorvoor moet je nog de flag -u toevoegen aan het commando.
-
-Je zal meestal `git add -u .` uitvoeren nadat je `git add .` uitvoerde, om ervoor te zorgen dat ook deletes gestaged worden voor commit.
+We hebben al eerdere gezien dat je met `git add .` alle wijzigingen kunt stagen voor commit. Nu is het zo dat deletes (wissen van files) niet mee gestaged worden. Daarvoor moet je nog de flag -A toevoegen aan het commando.
 
 ## Wijzigingen ongedaan maken
 
