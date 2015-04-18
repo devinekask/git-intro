@@ -68,7 +68,7 @@ Dit zijn enkele basiscommando's die je als je broekzak moet kennen. Dit is niets
 
 Je kan van elke bestaande map een git repository maken met het `git init` commando. Het maakt niet uit of hier al bestanden of submappen in aanwezig zijn. Wij zullen starten met een nieuwe lege map, maar weet dat dit niet nodig is om een project via git te beheren.
 
-Maak een nieuwe map aan en maak hiervan een git repository (opmerking: de dollartekens duiden erop dat dit over een command line input gaat door de gebruiken, en typ je niet):
+Maak een nieuwe map aan en maak hiervan een git repository (opmerking: de dollartekens duiden erop dat dit over een command line input gaat door de gebruiker, en typ je niet):
 
 	$ mkdir project
 	$ cd project
