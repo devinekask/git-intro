@@ -91,7 +91,7 @@ Via het `git status` commando kun je wat meer informatie opvragen over de huidig
 Maak een nieuw bestand hello.txt aan met de tekst "hello world":
 
 	$ echo "hello world" > hello.txt
-	
+
 Voer opnieuw het `git status` commando uit:
 
 	$ git status
@@ -104,7 +104,7 @@ Voer opnieuw het `git status` commando uit:
 	#
 	#	hello.txt
 	nothing added to commit but untracked files present (use "git add" to track)
-	
+
 Git laat ons weten dat er bestanden aanwezig zijn in je directory die nog niet bijgehouden worden door Git (untracked files present). Wanneer je de files wil bijhouden (tracken), dan moet je ze nog adden met het `git add` commando:
 
 	$ git add hello.txt
@@ -157,7 +157,7 @@ Je kan natuurlijk ook meerdere wijzigingen in 1x adden en committen. Pas de teks
 
 	$ echo "hello cp3" > hello.txt
 	$ echo "hello" > world.txt
-	
+
 Git status zal nu 2 zaken rapporteren: het wijzigen van een reeds getrackte file, en het detecteren van een nieuwe file die nog niet getracked wordt:
 
 	$ git status
@@ -173,7 +173,7 @@ Git status zal nu 2 zaken rapporteren: het wijzigen van een reeds getrackte file
 	#
 	#	world.txt
 	no changes added to commit (use "git add" and/or "git commit -a")
-	
+
 Je kan nu deze twee zaken afzonderlijk stagen door 2x een git add uit te voeren, maar dit kan ook in 1 keer, door `git add .`
 
 	$ git add .
@@ -297,33 +297,33 @@ Je kan trouwens de commit historiek van een repository bekijken via het `git log
 	commit ad78401ab771bea7425e08b9dc1a68fd96fb5bbf
 	Author: Wouter Verweirder <wouter@aboutme.be>
 	Date:   Wed Nov 6 09:53:16 2013 +0100
-	
+
 	    Revert "changed, but not sure about it"
-    
+
 	    This reverts commit f7e3f95692171c5c6dd6a9314f3acfc7354c3559.
-	
+
 	commit f7e3f95692171c5c6dd6a9314f3acfc7354c3559
 	Author: Wouter Verweirder <wouter@aboutme.be>
 	Date:   Wed Nov 6 09:42:31 2013 +0100
-	
+
 	    changed, but not sure about it
-	
+
 	commit a528ba56e7da390e37e28b1c9af938ba84f82c10
 	Author: Wouter Verweirder <wouter@aboutme.be>
 	Date:   Tue Nov 5 17:41:41 2013 +0100
-	
+
 	    welcome cp3 + new world file
-	
+
 	commit bd4b50051584138951ff43c332fffb5d1161d287
 	Author: Wouter Verweirder <wouter@aboutme.be>
 	Date:   Tue Nov 5 12:06:28 2013 +0100
-	
+
 	    world gewijzigd naar devine
-	
+
 	commit 860a90914f97666fd0020713b564467ca89b749d
 	Author: Wouter Verweirder <wouter@aboutme.be>
 	Date:   Tue Nov 5 11:45:20 2013 +0100
-	
+
 	    eerste commit
 
 Je ziet dat de "foute" commit nog steeds in de git historiek aanwezig is, en dat de wijzigingen via een nieuwe commit ongedaan gemaakt werden. Merk ook op dat elke commit een unieke SHA1-hash id heeft. Deze ids kun je gebruiken om commits te specifiëren bij bepaalde commano's.
@@ -341,19 +341,19 @@ Wanneer je nu opnieuw git log uitvoert, zie je dat de commits na a528 verdwenen 
 	commit a528ba56e7da390e37e28b1c9af938ba84f82c10
 	Author: Wouter Verweirder <wouter@aboutme.be>
 	Date:   Tue Nov 5 17:41:41 2013 +0100
-	
+
 	    welcome cp3 + new world file
-	
+
 	commit bd4b50051584138951ff43c332fffb5d1161d287
 	Author: Wouter Verweirder <wouter@aboutme.be>
 	Date:   Tue Nov 5 12:06:28 2013 +0100
-	
+
 	    world gewijzigd naar devine
-	
+
 	commit 860a90914f97666fd0020713b564467ca89b749d
 	Author: Wouter Verweirder <wouter@aboutme.be>
 	Date:   Tue Nov 5 11:45:20 2013 +0100
-	
+
 	    eerste commit
 
 Zo'n `git reset` commando ga je enkel gebruiken om lokale commits ongedaan te maken. Eens je samenwerkt met anderen, en commits reeds verspreid zijn onder andere users, dan gebruik je het `git revert` commando om een nieuwe commit te maken die een vorige commit ongedaan maakt.
@@ -618,7 +618,7 @@ Pas in de project map de tekst aan in hello.txt en push deze naar de remote repo
 	Writing objects: 100% (3/3), 303 bytes, done.
 	Total 3 (delta 0), reused 0 (delta 0)
 	To https://github.com/devinehowest/git-demo
-	   487257a..7f3b200  master -> master	
+	   487257a..7f3b200  master -> master
 
 Pas nu ook in de project2 map de tekst in dezelfde file aan en probeer te pushen:
 
@@ -656,7 +656,7 @@ We moeten eerst nog pullen, voor we kunnen pushen:
 	Patch failed at 0001 changed hello.txt in project2
 	The copy of the patch that failed is found in:
 	   /Users/wouter/Documents/project2/.git/rebase-apply/patch
-	
+
 	When you have resolved this problem, run "git rebase --continue".
 	If you prefer to skip this patch, run "git rebase --skip" instead.
 	To check out the original branch and stop rebasing, run "git rebase --abort".
@@ -725,14 +725,14 @@ Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
 ## Bestanden negeren
 Wanneer je zal samenwerken aan projecten, zal je - afhankelijk van je IDE - files gaan krijgen met lokale settings, of vendor dependencies (node_modules, bower_components). Deze files zijn enkel relevant voor jouw computer, maar niet voor de mensen waarmee je samenwerkt. Het is niet de bedoeling om die files te gaan sharen via GitHub.
 
-Als voorbeeld werken we met een gulp project. We zullen "per ongeluk" node_modules committen, en kijken om dit nadien recht te zetten.
+Als voorbeeld werken we met een webpack project. We zullen "per ongeluk" node_modules committen, en kijken om dit nadien recht te zetten.
 
 ### Opzetten git repository
 Maak een nieuwe repository aan op GitHub en clone deze op jouw computer:
 
 	$ git clone https://github.com/devinehowest/git-demo.git
 
-Maak daarna in deze map een werkend gulp project aan. Je kan uiteraard een kopie nemen van een vorig project en de dependencies installeren via `npm install`.
+Maak daarna in deze map een werkend webpack project aan. Je kan uiteraard een kopie nemen van een vorig project en de dependencies installeren via `npm install`.
 
 Commit & push deze wijzigingen naar GitHub
 
@@ -740,7 +740,7 @@ Commit & push deze wijzigingen naar GitHub
 	[master (root-commit) 0b95e12] initial project
 	 4284 files changed, 770604 insertions(+)
 	 create mode 100644 css/style.css
-	 create mode 100644 gulpfile.js
+	 create mode 100644 webpack.config.js
 	 create mode 100644 images/80_Big-Mac.jpg
 	 create mode 100644 images/80_Cheeseburger.jpg
 	 create mode 100644 images/80_Hamburger.jpg
@@ -753,17 +753,16 @@ Commit & push deze wijzigingen naar GitHub
 	 create mode 100644 js/src/classes/Gallery.js
 	 create mode 100644 js/src/classes/GalleryItem.js
 	 create mode 100644 js/src/script.js
-	 create mode 120000 node_modules/.bin/browserify
-	 create mode 120000 node_modules/.bin/gulp
+	 create mode 120000 node_modules/.bin/webpack
 	 create mode 100644 node_modules/browserify/.npmignore
 	 create mode 100644 node_modules/browserify/.travis.yml
 	 create mode 100644 node_modules/browserify/LICENSE
 	 create mode 100644 node_modules/browserify/bin/advanced.txt
 	 create mode 100644 node_modules/browserify/bin/args.js
 	 create mode 100755 node_modules/browserify/bin/cmd.js
-	
+
 	 ...
-	
+
 	$ git push -u origin master
 	Counting objects: 3373, done.
 	Delta compression using up to 8 threads.
@@ -781,8 +780,7 @@ Je hebt nu het volledige project, inclusief de node_modules op GitHub gepushed.
 Dit is overkill, het is niet nodig om de volledige dependency tree mee op te slaan in je git repository. We zullen deze fout nu rechtzetten:
 
 	$ git rm -r --cached node_modules/
-	rm 'node_modules/.bin/browserify'
-	rm 'node_modules/.bin/gulp'
+	rm 'node_modules/.bin/webpack'
 	rm 'node_modules/browserify/.npmignore'
 	rm 'node_modules/browserify/.travis.yml'
 	rm 'node_modules/browserify/LICENSE'
@@ -800,8 +798,7 @@ Een git status geeft nu het volgende resultaat:
 	# Changes to be committed:
 	#   (use "git reset HEAD <file>..." to unstage)
 	#
-	#	deleted:    node_modules/.bin/browserify
-	#	deleted:    node_modules/.bin/gulp
+	#	deleted:    node_modules/.bin/webpack
 	#	deleted:    node_modules/browserify/.npmignore
 	#	deleted:    node_modules/browserify/.travis.yml
 	#	deleted:    node_modules/browserify/LICENSE
@@ -816,8 +813,7 @@ Add, commit & push nu enkel deze deletes de remote, door de flag -u te gebruiken
 	$ git commit -m "removed node_modules folder"
 	[master 62c973d] removed node_modules folder
 	 4269 files changed, 770405 deletions(-)
-	 delete mode 120000 node_modules/.bin/browserify
-	 delete mode 120000 node_modules/.bin/gulp
+	 delete mode 120000 node_modules/.bin/webpack
 	 delete mode 100644 node_modules/browserify/.npmignore
 	 delete mode 100644 node_modules/browserify/.travis.yml
 	 delete mode 100644 node_modules/browserify/LICENSE
@@ -840,10 +836,10 @@ We zullen nu specifieren welke files we in de toekomst niet meer willen tracken.
 
 Maak een nieuw bestand aan met de naam ".gitignore" (zonder de quotes weliswaar) in de root van je repository. Geef dit de volgende inhoud:
 
+	.DS_Store
 	node_modules/
-	bower_components/
 
-Dit zorgt ervoor dat alle node_modules en bower_components (& al hun submappen en submappen met deze naam) genegeerd worden in de toekomst. Let wel: deze bestanden & mappen mogen nog niet getracked worden! Wij hebben daarvoor gezorgd, door ze in de voorgaande stap te removen via `git rm`.
+Dit zorgt ervoor dat het bestand .DS_Store en de map node_modules (& alle submappen van node_modules en submappen met deze naam) genegeerd worden in de toekomst. Let wel: deze bestanden & mappen mogen nog niet getracked worden! Wij hebben daarvoor gezorgd, door ze in de voorgaande stap te removen via `git rm`.
 
 Add, commit & push naar GitHub:
 
