@@ -732,7 +732,7 @@ Maak een nieuwe repository aan op GitHub en clone deze op jouw computer:
 
 	$ git clone https://github.com/devinehowest/git-demo.git
 
-Maak daarna in deze map een werkend webpack project aan. Je kan uiteraard een kopie nemen van een vorig project en de dependencies installeren via `npm install`.
+Maak daarna in deze map een werkend webpack project aan. Je kan uiteraard een kopie nemen van een vorig project en de dependencies installeren via `npm install` of `yarn`.
 
 Commit & push deze wijzigingen naar GitHub
 
@@ -865,7 +865,7 @@ Wis dus de volledige map, en clone deze opnieuw:
 
 	$ git clone https://github.com/devinehowest/git-demo.git
 
-Je zal zien dat de node_modules (en eventueel ook bower_components) niet in de map zitten. Installeer deze alle dependencies via `npm install` (en `bower install` indien je ook gebruik maakt van bower).
+Je zal zien dat de node_modules (en eventueel ook bower_components) niet in de map zitten. Installeer deze alle dependencies via `npm install` (of `yarn` indien je gebruik maakt van yarn).
 
 ## Git Resources
 
