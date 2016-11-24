@@ -291,6 +291,12 @@ Je terminal zal nu een vim editor tonen, waarin je een commit message kan typen.
 
 De file zal nu de inhoud bevatten van voor de laatste commit.
 
+Je kan ook een andere editor instellen voor de merge message edits. In plaats van vim is nano een gebruiksvriendelijker alternatief:
+
+```bash
+git config --global core.editor "nano"
+```
+
 Je kan trouwens de commit historiek van een repository bekijken via het `git log` commando:
 
 	$ git log
