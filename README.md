@@ -364,6 +364,111 @@ Wanneer je nu opnieuw git log uitvoert, zie je dat de commits na a528 verdwenen 
 
 Zo'n `git reset` commando ga je enkel gebruiken om lokale commits ongedaan te maken. Eens je samenwerkt met anderen, en commits reeds verspreid zijn onder andere users, dan gebruik je het `git revert` commando om een nieuwe commit te maken die een vorige commit ongedaan maakt.
 
+## Bestanden negeren
+Het zal niet nodig zijn om alle bestanden in een projectmap bij te houden via Git. Zo is het bijvoorbeeld geen goed idee om een node_modules map te tracken in je repository. Ook verborgen systeembestanden, zoals .DS_Store hebben geen enkel nut in een repository.
+
+Initialiseer je map als een node project, en koppel bijvoorbeeld webpack aan dit project:
+
+```bash
+$ yarn init -y
+$ yarn add webpack --dev
+```
+
+We zullen nu "per ongeluk" node_modules committen, en kijken om dit nadien recht te zetten.
+
+```bash
+$ git add .
+$ git commit -m "initial project"
+[master (root-commit) 0b95e12] initial project
+ 4284 files changed, 770604 insertions(+)
+ ...
+ create mode 120000 node_modules/.bin/webpack
+ create mode 100644 node_modules/browserify/.npmignore
+ create mode 100644 node_modules/browserify/.travis.yml
+ create mode 100644 node_modules/browserify/LICENSE
+ create mode 100644 node_modules/browserify/bin/advanced.txt
+ create mode 100644 node_modules/browserify/bin/args.js
+ create mode 100755 node_modules/browserify/bin/cmd.js
+
+ ...
+ ```
+
+### Bestanden wissen
+
+Je hebt nu het volledige project, inclusief de node_modules toegevoegd aan je git repository.
+
+Dit is overkill, het is niet nodig om de volledige dependency tree mee op te slaan in je git repository. We zullen deze fout nu rechtzetten:
+
+	$ git rm -r --cached node_modules/
+	rm 'node_modules/.bin/webpack'
+	rm 'node_modules/browserify/.npmignore'
+	rm 'node_modules/browserify/.travis.yml'
+	rm 'node_modules/browserify/LICENSE'
+	rm 'node_modules/browserify/bin/advanced.txt'
+	rm 'node_modules/browserify/bin/args.js'
+	rm 'node_modules/browserify/bin/cmd.js'
+	...
+
+De --cached optie zorgt ervoor dat de file gewist word uit de repository index, maar wel blijft staan in jouw filesysteem.
+
+Een git status geeft nu het volgende resultaat:
+
+	$ git status
+	# On branch master
+	# Changes to be committed:
+	#   (use "git reset HEAD <file>..." to unstage)
+	#
+	#	deleted:    node_modules/.bin/webpack
+	#	deleted:    node_modules/browserify/.npmignore
+	#	deleted:    node_modules/browserify/.travis.yml
+	#	deleted:    node_modules/browserify/LICENSE
+	#	deleted:    node_modules/browserify/bin/advanced.txt
+	#	deleted:    node_modules/browserify/bin/args.js
+	#	deleted:    node_modules/browserify/bin/cmd.js
+	...
+
+Add & commit nu deze deletes, door de flag -A te gebruiken bij je add:
+
+	$ git add -A .
+	$ git commit -m "removed node_modules folder"
+	[master 62c973d] removed node_modules folder
+	 4269 files changed, 770405 deletions(-)
+	 delete mode 120000 node_modules/.bin/webpack
+	 delete mode 100644 node_modules/browserify/.npmignore
+	 delete mode 100644 node_modules/browserify/.travis.yml
+	 delete mode 100644 node_modules/browserify/LICENSE
+	 delete mode 100644 node_modules/browserify/bin/advanced.txt
+	 delete mode 100644 node_modules/browserify/bin/args.js
+	 delete mode 100755 node_modules/browserify/bin/cmd.js
+	 delete mode 100644 node_modules/browserify/bin/usage.txt
+
+### Bestanden & mappen verwijderen uit je volledige historiek
+
+We hebben zopas een commit aangemaakt, waarin deze node_modules opnieuw verwijderd worden. Er is echter nog steeds een commit waarin deze node_modules wél aanwezig zijn, wat onze repository onnodig groot maakt. Indien je mappen of bestanden wil verwijderen uit de volledige historiek van je project, dan moet je nog een stap verder gaan.
+
+Via het git filter-branch commando kun je de git historiek aanpassen. Om onze node_modules map te wissen, doen we het volgende:
+
+	$ git filter-branch --tree-filter 'rm -rf node_modules' HEAD
+
+De map wordt gewist op je filesysteem én in de historiek. Let op, wanneer je via yarn opnieuw de node_modules koppelt, kun je ze per ongeluk opnieuw adden aan de historiek, wat niet de bedoeling is. We zullen dit vermijden met behulp van een .gitignore bestand.
+
+### .gitignore
+We zullen nu specifieren welke files we in de toekomst niet meer willen tracken. Dit kan mbv een .gitignore file. Dit is een tekstbestand in je repository dat specifieert welke bestanden en mappen genegeerd mogen worden door git.
+
+Maak een nieuw bestand aan met de naam ".gitignore" (zonder de quotes weliswaar) in de root van je repository. Geef dit de volgende inhoud:
+
+	.DS_Store
+	node_modules/
+
+Dit zorgt ervoor dat het bestand .DS_Store en de map node_modules (& alle submappen van node_modules en submappen met deze naam) genegeerd worden in de toekomst.
+
+Add en commit dit bestand, zodat dit mee opgenomen wordt in je repository.
+
+	$ git add -A .
+	$ git commit -m "added .gitignore"
+
+In de praktijk zal je als één van je eerste bestanden zo'n .gitignore bestand aanmaken. Zo vermijd je dat je repository "vervuild" wordt met onnodige bestanden, en vermijd je ingrijpende acties zoals het verwijderen van mappen & bestanden uit de historiek.
+
 ## Samenwerken met git
 
 Tot nu toe hebben we lokaal gewerkt met git. Je kan ook met meerdere mensen samenwerken aan 1 repository door te werken met een remote server. Iedereen heeft een lokale kopie van de repository staan, en kan zijn wijzigingen via een remote server gaan synchronizeren met andere mensen die de repository hebben staan.
@@ -405,6 +510,10 @@ Open een terminal venster en navigeer via cd commandos naar de map van de git re
 	Branch master set up to track remote branch master from origin.
 
 Het `git push` commando zal lokale, niet-gesynchronizeerde wijzigingen uploaden naar de remote lokatie. Het -u attribuut gebruik je de allereerste keer, om ervoor te zorgen dat je bij toekomstige synchonizaties de remote name niet meer moet opgeven. Je kan dan in de toekomst gewoon `git push` uitvoeren.
+
+### Gitignore aanmaken
+
+Vergeet niet om meteen al een .gitignore bestand aan te maken, met onder andere ignores voor node_modules en .DS_Store. Zo vermijd je dat deze mappen en bestanden mee gesynchroniseerd worden!
 
 ### Git add - commit - push
 
@@ -727,151 +836,6 @@ Nu kan je opnieuw pushen naar de remote:
 	   7f3b200..920c81f  master -> master
 
 Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
-
-## Bestanden negeren
-Wanneer je zal samenwerken aan projecten, zal je - afhankelijk van je IDE - files gaan krijgen met lokale settings, of vendor dependencies (node_modules, bower_components). Deze files zijn enkel relevant voor jouw computer, maar niet voor de mensen waarmee je samenwerkt. Het is niet de bedoeling om die files te gaan sharen via GitHub.
-
-Als voorbeeld werken we met een webpack project. We zullen "per ongeluk" node_modules committen, en kijken om dit nadien recht te zetten.
-
-### Opzetten git repository
-Maak een nieuwe repository aan op GitHub en clone deze op jouw computer:
-
-	$ git clone https://github.com/devinehowest/git-demo.git
-
-Maak daarna in deze map een werkend webpack project aan. Je kan uiteraard een kopie nemen van een vorig project en de dependencies installeren via `npm install` of `yarn`.
-
-Commit & push deze wijzigingen naar GitHub
-
-	$ git commit -m "initial project"
-	[master (root-commit) 0b95e12] initial project
-	 4284 files changed, 770604 insertions(+)
-	 create mode 100644 css/style.css
-	 create mode 100644 webpack.config.js
-	 create mode 100644 images/80_Big-Mac.jpg
-	 create mode 100644 images/80_Cheeseburger.jpg
-	 create mode 100644 images/80_Hamburger.jpg
-	 create mode 100644 images/80_McDouble.jpg
-	 create mode 100644 images/80_Quarter-Pounder-with-Cheese.jpg
-	 create mode 100644 index.html
-	 create mode 100644 js/bean.min.js
-	 create mode 100755 js/script.dist.js
-	 create mode 100755 js/script.dist.js.map
-	 create mode 100644 js/src/classes/Gallery.js
-	 create mode 100644 js/src/classes/GalleryItem.js
-	 create mode 100644 js/src/script.js
-	 create mode 120000 node_modules/.bin/webpack
-	 create mode 100644 node_modules/browserify/.npmignore
-	 create mode 100644 node_modules/browserify/.travis.yml
-	 create mode 100644 node_modules/browserify/LICENSE
-	 create mode 100644 node_modules/browserify/bin/advanced.txt
-	 create mode 100644 node_modules/browserify/bin/args.js
-	 create mode 100755 node_modules/browserify/bin/cmd.js
-
-	 ...
-
-	$ git push -u origin master
-	Counting objects: 3373, done.
-	Delta compression using up to 8 threads.
-	Compressing objects: 100% (2896/2896), done.
-	Writing objects: 100% (3373/3373), 4.38 MiB | 219.00 KiB/s, done.
-	Total 3373 (delta 447), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo.git
-	 * [new branch]      master -> master
-	Branch master set up to track remote branch master from origin.
-
-### Bestanden wissen
-
-Je hebt nu het volledige project, inclusief de node_modules op GitHub gepushed.
-
-Dit is overkill, het is niet nodig om de volledige dependency tree mee op te slaan in je git repository. We zullen deze fout nu rechtzetten:
-
-	$ git rm -r --cached node_modules/
-	rm 'node_modules/.bin/webpack'
-	rm 'node_modules/browserify/.npmignore'
-	rm 'node_modules/browserify/.travis.yml'
-	rm 'node_modules/browserify/LICENSE'
-	rm 'node_modules/browserify/bin/advanced.txt'
-	rm 'node_modules/browserify/bin/args.js'
-	rm 'node_modules/browserify/bin/cmd.js'
-	...
-
-De --cached optie zorgt ervoor dat de file gewist word uit de repository index, maar wel blijft staan in jouw filesysteem.
-
-Een git status geeft nu het volgende resultaat:
-
-	$ git status
-	# On branch master
-	# Changes to be committed:
-	#   (use "git reset HEAD <file>..." to unstage)
-	#
-	#	deleted:    node_modules/.bin/webpack
-	#	deleted:    node_modules/browserify/.npmignore
-	#	deleted:    node_modules/browserify/.travis.yml
-	#	deleted:    node_modules/browserify/LICENSE
-	#	deleted:    node_modules/browserify/bin/advanced.txt
-	#	deleted:    node_modules/browserify/bin/args.js
-	#	deleted:    node_modules/browserify/bin/cmd.js
-	...
-
-Add, commit & push nu enkel deze deletes de remote, door de flag -u te gebruiken bij je add:
-
-	$ git add -u .
-	$ git commit -m "removed node_modules folder"
-	[master 62c973d] removed node_modules folder
-	 4269 files changed, 770405 deletions(-)
-	 delete mode 120000 node_modules/.bin/webpack
-	 delete mode 100644 node_modules/browserify/.npmignore
-	 delete mode 100644 node_modules/browserify/.travis.yml
-	 delete mode 100644 node_modules/browserify/LICENSE
-	 delete mode 100644 node_modules/browserify/bin/advanced.txt
-	 delete mode 100644 node_modules/browserify/bin/args.js
-	 delete mode 100755 node_modules/browserify/bin/cmd.js
-	 delete mode 100644 node_modules/browserify/bin/usage.txt
-	 ...
-	$ git push
-	Counting objects: 3, done.
-	Delta compression using up to 8 threads.
-	Compressing objects: 100% (2/2), done.
-	Writing objects: 100% (2/2), 244 bytes | 0 bytes/s, done.
-	Total 2 (delta 1), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo.git
-	   0b95e12..62c973d  master -> master
-
-### .gitignore
-We zullen nu specifieren welke files we in de toekomst niet meer willen tracken. Dit kan mbv een .gitignore file. Dit is een tekstbestand in je repository dat specifieert welke bestanden en mappen genegeerd mogen worden door git.
-
-Maak een nieuw bestand aan met de naam ".gitignore" (zonder de quotes weliswaar) in de root van je repository. Geef dit de volgende inhoud:
-
-	.DS_Store
-	node_modules/
-
-Dit zorgt ervoor dat het bestand .DS_Store en de map node_modules (& alle submappen van node_modules en submappen met deze naam) genegeerd worden in de toekomst. Let wel: deze bestanden & mappen mogen nog niet getracked worden! Wij hebben daarvoor gezorgd, door ze in de voorgaande stap te removen via `git rm`.
-
-Add, commit & push naar GitHub:
-
-	$ git add .
-	$ git commit -m "added .gitignore"
-	[master 803c414] added gitignore
-	 1 file changed, 2 insertions(+)
-	 create mode 100644 .gitignore
-	$ git push
-	Counting objects: 4, done.
-	Delta compression using up to 8 threads.
-	Compressing objects: 100% (2/2), done.
-	Writing objects: 100% (3/3), 312 bytes | 0 bytes/s, done.
-	Total 3 (delta 1), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo.git
-	   62c973d..803c414  master -> master
-
-
-### project opnieuw opzetten
-Het is een goed idee om de volledige map nu te wissen, en de repository opnieuw te clonen. Zo start je in dezelfde situatie als iemand die het project ook wil runnen.
-
-Wis dus de volledige map, en clone deze opnieuw:
-
-	$ git clone https://github.com/devinehowest/git-demo.git
-
-Je zal zien dat de node_modules (en eventueel ook bower_components) niet in de map zitten. Installeer deze alle dependencies via `npm install` (of `yarn` indien je gebruik maakt van yarn).
 
 ## Git Resources
 
