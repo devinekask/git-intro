@@ -844,3 +844,53 @@ Dit is een basis introductie om je op weg te helpen met git. Er is nog heel wat 
 * [https://www.atlassian.com/git/](https://www.atlassian.com/git/)
 * [https://help.github.com/](https://help.github.com/)
 * [http://git-scm.com/book](http://git-scm.com/book)
+
+
+## GIT branches
+Dit is een walkthrough om te werken met develop & master branches.
+
+Begin met een nieuwe git repository aan te maken. 
+
+Voeg daarna een commit toe met een readme bestand.
+
+Maak een branch develop aan:
+	$ git branch develop
+
+Een overzicht van je branches kun je opvragen op de volgende manier:
+	$ git branch
+
+Switch naar de develop branch:
+	$ git checkout develop
+
+Push deze develop branch naar remote:
+	$ git push origin develop
+
+Doe enkele commits op de develop branch. Je kan deze tussendoor gerust pushen naar github (git push origin develop)
+
+Switch naar master om in een volgende stap develop te mergen:
+
+	$ git checkout master
+
+Merge develop into master:
+
+	$ git merge develop master
+
+Switch onmiddellijk terug naar develop, zodat je niet per ongeluk zit te ontwikkelen in de master:
+
+	$ git checkout develop
+
+Push de branches:
+
+	$ git push origin master
+	$ git push origin develop
+
+Alternatief is om ze allemaal ineens te pushen:
+
+	$ git push --all origin
+
+Op andere locatie kun je dan de branches pullen:
+
+
+	$ git pull --rebase origin develop
+	$ git pull --rebase origin master
+
