@@ -847,13 +847,13 @@ Dit is een basis introductie om je op weg te helpen met git. Er is nog heel wat 
 
 
 ## GIT branches
-Dit is een walkthrough om te werken met develop & master branches.
+Dit is een walkthrough om te werken met develop en master branches.
 
 Begin met een nieuwe git repository aan te maken. 
 
-Voeg daarna een commit toe met een readme bestand.
+Voeg daarna een commit toe met een README bestand.
 
-Maak een branch develop aan:
+Maak dan een branch develop aan door volgende commando uit te voeren:
 
 	$ git branch develop
 
