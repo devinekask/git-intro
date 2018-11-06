@@ -853,7 +853,7 @@ Begin met een nieuwe git repository aan te maken.
 
 Voeg daarna een commit toe met een README bestand.
 
-Maak dan een branch develop aan door volgende commando uit te voeren:
+Maak dan een branch `develop` aan door volgende commando uit te voeren:
 
 	$ git branch develop
 
@@ -861,25 +861,25 @@ Een overzicht van je branches kun je opvragen via deze commando:
 
 	$ git branch
 
-Switch naar de develop branch:
+Switch naar de `develop` branch:
 
 	$ git checkout develop
 
-Push deze develop branch naar remote:
+Push deze `develop` branch naar remote:
 
 	$ git push origin develop
 
-Doe enkele commits op de develop branch. Je kan deze tussendoor gerust pushen naar github (git push origin develop)
+Doe enkele commits op de develop branch. Je kan deze tussendoor gerust pushen naar github (via `git push origin develop`)
 
-Switch naar master om in een volgende stap develop te mergen:
+Switch terug naar `master` om in een volgende stap `develop` te mergen:
 
 	$ git checkout master
 
-Merge develop into master:
+Merge `develop` into `master`:
 
 	$ git merge develop master
 
-Switch onmiddellijk terug naar develop, zodat je niet per ongeluk zit te ontwikkelen in de master:
+Switch onmiddellijk terug naar `develop`, zodat je niet per ongeluk zit te ontwikkelen in de `master` branch:
 
 	$ git checkout develop
 
@@ -893,7 +893,6 @@ Alternatief is om ze allemaal ineens te pushen:
 	$ git push --all origin
 
 Op andere locatie kun je dan de branches pullen:
-
 
 	$ git pull --rebase origin develop
 	$ git pull --rebase origin master
