@@ -854,15 +854,19 @@ Begin met een nieuwe git repository aan te maken.
 Voeg daarna een commit toe met een readme bestand.
 
 Maak een branch develop aan:
+
 	$ git branch develop
 
-Een overzicht van je branches kun je opvragen op de volgende manier:
+Een overzicht van je branches kun je opvragen via deze commando:
+
 	$ git branch
 
 Switch naar de develop branch:
+
 	$ git checkout develop
 
 Push deze develop branch naar remote:
+
 	$ git push origin develop
 
 Doe enkele commits op de develop branch. Je kan deze tussendoor gerust pushen naar github (git push origin develop)
