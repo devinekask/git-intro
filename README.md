@@ -719,7 +719,7 @@ Push naar de remote repository. Doe ook opnieuw een pull in de project map, zoda
 
 Tot nu toe hebben we braafjes in aparte files wijzigingen aangebracht. Het kan echter gebruiken dat je met 2 personen in dezelfde file wijzigingen hebt aangebracht, en dat er een conflict optreedt.
 
-Pas in de project map de tekst aan in hello.txt en push deze naar de remote repository:
+Pas in de `project` map de tekst aan in `hello.txt` en push deze naar de remote repository:
 
 	project$ echo "edit in project" > hello.txt
 	project$ git add .
@@ -735,7 +735,7 @@ Pas in de project map de tekst aan in hello.txt en push deze naar de remote repo
 	To https://github.com/devinekask/git-demo
 	   487257a..7f3b200  master -> master
 
-Pas nu ook in de project2 map de tekst in dezelfde file aan en probeer te pushen:
+Pas nu ook in de `project2` map de tekst in dezelfde file aan en probeer te pushen:
 
 	project2$ echo "edit in project2" > hello.txt
 	project2$ git add .
@@ -795,9 +795,9 @@ Via `git status` kun je een lijst opvragen met de merge conflicts:
 	#
 	no changes added to commit (use "git add" and/or "git commit -a")
 
-Je krijgt de melding dat je aan het rebasen bent. Bij Unmerged paths zie je de files die in conflict zijn. Je moet eerste het conflict oplossen, door de file te editen, voor je kan verder doen met de rebase.
+Je krijgt de melding dat je aan het rebasen bent. Bij "Unmerged paths" zie je de files die in conflict zijn. Je moet eerste het conflict oplossen, door de file te editen, voor je kan verder doen met de rebase.
 
-Open het txt bestand in een teksteditor. Je zal zien dat zowel de content uit project als project2 aanwezig is:
+Open het txt bestand in een teksteditor. Je zal zien dat zowel de content uit `project` als `project2` aanwezig is:
 
 	<<<<<<< HEAD
 	edit in project
@@ -838,13 +838,21 @@ Nu kan je opnieuw pushen naar de remote:
 Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
 
 
+## Git branches
+Via Git kan je ook gebruik maken van branches.
 
-## GIT branches
-Dit is een walkthrough om te werken met develop en master branches.
+Je kan gebruik maken van branches om:
+- Nieuwe features te ontwikkelen
+- Bugs te fixen
+- Te experimenteren met nieuwe ideeën zonder je production code (code die online staat) te beïnvloeden
+
+Dit is een walkthrough om te werken met 2 branches, namelijk `develop` en `master` branches. Op de `master` branch kan je de production ready code terugvinden. Op de `develop` branch daarentegen kan je code pushen die nog niet volledig klaar is om aan je eindgebruiker te tonen.
+
+Vanaf het moment dat je tevreden bent met de (bugvrije) code in de `develop` branch, kan je deze "verplaatsen" naar de `master` branch. Dit proces wordt verder uitgelegd.
 
 Begin met een nieuwe git repository aan te maken.
 
-Voeg daarna een commit toe met een README bestand.
+Voeg daarna een commit toe met een `README.md` bestand.
 
 Maak dan een branch `develop` aan door volgende commando uit te voeren:
 
@@ -858,11 +866,11 @@ Switch naar de `develop` branch:
 
 	$ git checkout develop
 
-Push deze `develop` branch naar remote:
+Push deze `develop` branch naar remote en bekijk het resultaat op GitHub:
 
 	$ git push origin develop
 
-Doe enkele commits op de develop branch. Je kan deze tussendoor gerust pushen naar github (via `git push origin develop`)
+Doe enkele commits op de `develop` branch. Je kan deze tussendoor gerust pushen naar Github (via `git push origin develop`)
 
 Switch terug naar `master` om in een volgende stap `develop` te mergen:
 
