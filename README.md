@@ -496,7 +496,7 @@ Daarna configureren we git om gebruik te maken van onze OSX keychain om paswoord
 
 Login op je GitHub account, en klik op de "New repository" button. Kies een naam voor je repository en klik op de "Create Repository" button.
 
-Open een terminal venster en navigeer via cd commandos naar de map van de git repository met de hello world files. We zullen er voor zorgen dat we onze lokale repository via GitHub kunnen synchronizeren, door een "remote" te adden. Een remote is een lokatie waarmee je een git repository kan synchronizeren:
+Open een terminal venster en navigeer via `cd` commandos naar de map van de git repository met de "hello world" files. We zullen er voor zorgen dat we onze lokale repository via GitHub kunnen synchronizeren, door een "remote" te adden. Een remote is een locatie waarmee je een git repository kan synchronizeren:
 
 	$ git remote add origin https://github.com/devinehowest/git-demo
 	$ git push -u origin master
@@ -509,17 +509,17 @@ Open een terminal venster en navigeer via cd commandos naar de map van de git re
 	 * [new branch]      master -> master
 	Branch master set up to track remote branch master from origin.
 
-Het `git push` commando zal lokale, niet-gesynchronizeerde wijzigingen uploaden naar de remote lokatie. Het -u attribuut gebruik je de allereerste keer, om ervoor te zorgen dat je bij toekomstige synchonizaties de remote name niet meer moet opgeven. Je kan dan in de toekomst gewoon `git push` uitvoeren.
+Het `git push` commando zal lokale, niet-gesynchronizeerde wijzigingen uploaden naar de remote lokatie. Het `-u` attribuut gebruik je de allereerste keer, om ervoor te zorgen dat je bij toekomstige synchonizaties de remote name niet meer moet opgeven. Je kan dan in de toekomst gewoon `git push` uitvoeren.
 
 ### Gitignore aanmaken
 
-Vergeet niet om meteen al een `.gitignore` bestand aan te maken, met onder andere ignores voor `node_modules` en `.DS_Store`. Zo vermijd je dat deze mappen en bestanden mee gesynchroniseerd worden!
+Vergeet niet om meteen al een `.gitignore` bestand aan te maken, met onder andere ignores voor `node_modules`, `.DS_Store` en eventueel `dist`. Zo vermijd je dat deze mappen en bestanden mee gesynchroniseerd worden!
 
 ### Git add - commit - push
 
 Vanaf nu kun je commits gaan pushen naar de online repository. Meestal bundel je verschillende lokale commits wanneer je gaat pushen. Dit hebben we in feite reeds gedaan met onze eerste push: alle commits die we eerder uitvoerden, staan nu ook op de online repository.
 
-Wis het world.txt bestand, add & commit. We maken gebruik van `git add -u .` om ervoor te zorgen dat de delete actie van die file gestaged wordt:
+Wis het `world.txt` bestand, add & commit. We maken gebruik van `git add -u .` om ervoor te zorgen dat de delete actie van die file gestaged wordt:
 
 	$ rm world.txt
 	$ git add -u .
@@ -537,7 +537,7 @@ Maak een README.md bestand aan, met een beetje info over de repository:
 	 1 file changed, 1 insertion(+)
 	 create mode 100644 README.md
 
-Voer een git status uit. Je ziet in het status rapport dat de repository 2 commits achterstand heeft op de online versie:
+Voer een `git status` uit. Je ziet in het status rapport dat de repository 2 commits achterstand heeft op de online versie:
 
 	# On branch master
 	# Your branch is ahead of 'origin/master' by 2 commits.
@@ -554,7 +554,7 @@ Doe een `git push` om je commits op GitHub te plaatsen:
 	To https://github.com/devinehowest/git-demo
 	   a528ba5..9ed12bf  master -> master
 
-Wanneer je de repository via je browser bekijkt, zal je zien dat de inhoud van de README.md file, getoond wordt onder de lijst van files. Dit is een bestand in het MarkDown formaat. Markdown is een eenvoudige markup taal om documenten op te maken. Meer informatie hierover kan je onder andere vinden op wikipedia: [http://en.wikipedia.org/wiki/Markdown](http://en.wikipedia.org/wiki/Markdown).
+Wanneer je de repository via je browser bekijkt, zal je zien dat de inhoud van de `README.md` file, getoond wordt onder de lijst van files. Dit is een bestand in het Markdown formaat. Markdown is een eenvoudige markup taal om documenten op te maken. Meer informatie hierover kan je onder andere vinden op wikipedia: [http://en.wikipedia.org/wiki/Markdown](http://en.wikipedia.org/wiki/Markdown).
 
 ### Bestaande repository binnenhalen
 
@@ -577,9 +577,9 @@ Je hebt nu 2 clones van dezelfde repository op je computer. Eentje in de map pro
 
 ### push - pull
 
-We simuleren samenwerken met 2 users door op in twee verschillende mappen met dezelfde remote te synchronizeren. Let bij de volgende acties op in welke map je de nodige commando's uitvoert. (de project map staat vanaf nu telkens voor het dollarteken in het uit te voeren commando).
+We simuleren samenwerken met 2 users door op in twee verschillende mappen met dezelfde remote (online repository) te synchronizeren. Let bij de volgende acties op in welke map je de nodige commando's uitvoert (de project map staat vanaf nu telkens voor het dollarteken in het uit te voeren commando).
 
-In map 1 maken we een nieuw bestand project.txt aan, we adden, committen en pushen naar de remote:
+In map 1 maken we een nieuw bestand `project.txt` aan, we adden, committen en pushen naar de remote:
 
 	project$ echo "created in project" > project.txt
 	project$ git add .
@@ -596,7 +596,7 @@ In map 1 maken we een nieuw bestand project.txt aan, we adden, committen en push
 	To https://github.com/devinehowest/git-demo
 	   9ed12bf..a93634a  master -> master
 
-In map 2 maken we een nieuw bestand project2.txt aan, doen we een add & commit en projecten we te pushen naar de remote:
+In map 2 maken we een nieuw bestand `project2.txt` aan, doen we een add & commit en projecten we te pushen naar de remote:
 
 	project2$ echo "created in project2" > project2.txt
 	project2$ git add .
@@ -630,7 +630,7 @@ We krijgen een vim editor te zien om een merge uit te voeren. Je kan hier een cu
 	 1 file changed, 1 insertion(+)
 	 create mode 100644 project.txt
 
-Wanneer je een git status uitvoert, zal je zien dat je 2 commits voor bent op de remote: 1 commit is de merge commit, en een tweede commit is de project2.txt commit:
+Wanneer je een `git status` uitvoert, zal je zien dat je 2 commits voor bent op de remote: 1 commit is de merge commit, en een tweede commit is de `project2.txt` commit:
 
 	project2$ git status
 	# On branch master
@@ -666,7 +666,7 @@ Haal nu deze commits ook op in je eerste map via een `git pull` commando:
 
 ### rebase
 
-Wij zullen voorlopig werken met een centralized workflow: we werken met meerdere mensen samen op 1 master branch via 1 remote. Er zijn nog andere, meer geavanceerde workflows die werken via branches en forks. Deze zijn echter al iets complexer, wij zullen ons voorlopig houden aan de centralized workflow.
+Wij zullen voorlopig werken met een centralized workflow: we werken met meerdere mensen samen op 1 master branch via 1 remote. Er zijn nog andere, meer geavanceerde workflows die werken via branches en forks. Deze zijn echter al iets complexer.
 
 In het voorgaande scenario hebben we een merge commit toegevoegd om een niet up-to-date repository te fast-forwarden. Deze is bij een centralized workflow overbodig: we kunnen beter gebruik maken van een rebase bij de git pull. Een rebase zal eerst alle commits van de remote uitvoeren, en jouw commits erachter uitvoeren, in plaats van standaard een merge commit uit te voeren.
 
