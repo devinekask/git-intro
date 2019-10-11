@@ -498,14 +498,14 @@ Login op je GitHub account, en klik op de "New repository" button. Kies een naam
 
 Open een terminal venster en navigeer via `cd` commandos naar de map van de git repository met de "hello world" files. We zullen er voor zorgen dat we onze lokale repository via GitHub kunnen synchronizeren, door een "remote" te adden. Een remote is een locatie waarmee je een git repository kan synchronizeren:
 
-	$ git remote add origin https://github.com/devinehowest/git-demo
+	$ git remote add origin https://github.com/devinekask/git-demo
 	$ git push -u origin master
 	Counting objects: 10, done.
 	Delta compression using up to 8 threads.
 	Compressing objects: 100% (4/4), done.
 	Writing objects: 100% (10/10), 742 bytes, done.
 	Total 10 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	 * [new branch]      master -> master
 	Branch master set up to track remote branch master from origin.
 
@@ -551,7 +551,7 @@ Doe een `git push` om je commits op GitHub te plaatsen:
 	Compressing objects: 100% (3/3), done.
 	Writing objects: 100% (5/5), 506 bytes, done.
 	Total 5 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	   a528ba5..9ed12bf  master -> master
 
 Wanneer je de repository via je browser bekijkt, zal je zien dat de inhoud van de `README.md` file, getoond wordt onder de lijst van files. Dit is een bestand in het Markdown formaat. Markdown is een eenvoudige markup taal om documenten op te maken. Meer informatie hierover kan je onder andere vinden op wikipedia: [http://en.wikipedia.org/wiki/Markdown](http://en.wikipedia.org/wiki/Markdown).
@@ -566,7 +566,7 @@ Open een tweede terminal venster, navigeer naar de bovenliggende map van je orig
 
 Voer het git clone commando uit, om de online repository binnen te halen:
 
-	$ git clone https://github.com/devinehowest/git-demo project2
+	$ git clone https://github.com/devinekask/git-demo project2
 	Cloning into 'project2'...
 	remote: Counting objects: 15, done.
 	remote: Compressing objects: 100% (7/7), done.
@@ -593,7 +593,7 @@ In map 1 maken we een nieuw bestand `project.txt` aan, we adden, committen en pu
 	Compressing objects: 100% (2/2), done.
 	Writing objects: 100% (3/3), 335 bytes, done.
 	Total 3 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	   9ed12bf..a93634a  master -> master
 
 In map 2 maken we een nieuw bestand `project2.txt` aan, doen we een add & commit en projecten we te pushen naar de remote:
@@ -605,9 +605,9 @@ In map 2 maken we een nieuw bestand `project2.txt` aan, doen we een add & commit
 	 1 file changed, 1 insertion(+)
 	 create mode 100644 project2.txt
 	project2$ git push
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	 ! [rejected]        master -> master (non-fast-forward)
-	error: failed to push some refs to 'https://github.com/devinehowest/git-demo'
+	error: failed to push some refs to 'https://github.com/devinekask/git-demo'
 	hint: Updates were rejected because the tip of your current branch is behind
 	hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
 	hint: before pushing again.
@@ -623,7 +623,7 @@ We krijgen een vim editor te zien om een merge uit te voeren. Je kan hier een cu
 	remote: Compressing objects: 100% (2/2), done.
 	remote: Total 3 (delta 0), reused 3 (delta 0)
 	Unpacking objects: 100% (3/3), done.
-	From https://github.com/devinehowest/git-demo
+	From https://github.com/devinekask/git-demo
 	   9ed12bf..a93634a  master     -> origin/master
 	Merge made by the 'recursive' strategy.
 	 project.txt | 1 +
@@ -646,7 +646,7 @@ Doe opnieuw een push van die commits naar de remote. Het pushen lukt deze keer w
 	Compressing objects: 100% (4/4), done.
 	Writing objects: 100% (5/5), 546 bytes, done.
 	Total 5 (delta 2), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	   a93634a..58096ca  master -> master
 
 Haal nu deze commits ook op in je eerste map via een `git pull` commando:
@@ -656,7 +656,7 @@ Haal nu deze commits ook op in je eerste map via een `git pull` commando:
 	remote: Compressing objects: 100% (2/2), done.
 	remote: Total 5 (delta 2), reused 5 (delta 2)
 	Unpacking objects: 100% (5/5), done.
-	From https://github.com/devinehowest/git-demo
+	From https://github.com/devinekask/git-demo
 	   a93634a..58096ca  master     -> origin/master
 	Updating a93634a..58096ca
 	Fast-forward
@@ -668,9 +668,9 @@ Haal nu deze commits ook op in je eerste map via een `git pull` commando:
 
 Wij zullen voorlopig werken met een centralized workflow: we werken met meerdere mensen samen op 1 master branch via 1 remote. Er zijn nog andere, meer geavanceerde workflows die werken via branches en forks. Deze zijn echter al iets complexer.
 
-In het voorgaande scenario hebben we een merge commit toegevoegd om een niet up-to-date repository te fast-forwarden. Deze is bij een centralized workflow overbodig: we kunnen beter gebruik maken van een rebase bij de git pull. Een rebase zal eerst alle commits van de remote uitvoeren, en jouw commits erachter uitvoeren, in plaats van standaard een merge commit uit te voeren.
+In het voorgaande scenario hebben we een merge commit toegevoegd om een niet up-to-date repository te fast-forwarden. Deze is bij een centralized workflow overbodig: we kunnen beter gebruik maken van een rebase bij de `git pull`. Een rebase zal eerst alle commits van de remote uitvoeren, en jouw commits erachter uitvoeren, in plaats van standaard een merge commit uit te voeren.
 
-Doe een delete van project.txt in de project map:
+Doe een delete van `project.txt` in de project map:
 
 	project$ rm project.txt
 	project$ git add -u .
@@ -684,10 +684,10 @@ Doe een delete van project.txt in de project map:
 	Compressing objects: 100% (2/2), done.
 	Writing objects: 100% (2/2), 230 bytes, done.
 	Total 2 (delta 1), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	   58096ca..59bfb66  master -> master
 
-Doe daarna een delete van project2.txt in de project2 map. We zullen ook hier eerst een pull moeten doen voordat we kunnen pushen. Het verschil bij de pull is dat we een rebase flag meegeven, om ervoor te zorgen dat eerst alle commits van de remote repository uitgevoerd worden, en daarna onze eigen commits:
+Doe daarna een delete van `project2.txt` in de `project2` map. We zullen ook hier eerst een pull moeten doen voordat we kunnen pushen. Het verschil bij de pull is dat we een rebase flag meegeven, om ervoor te zorgen dat eerst alle commits van de remote repository uitgevoerd worden, en daarna onze eigen commits:
 
 	project2$ rm project2.txt
 	project2$ git add -u .
@@ -700,12 +700,12 @@ Doe daarna een delete van project2.txt in de project2 map. We zullen ook hier ee
 	remote: Compressing objects: 100% (1/1), done.
 	remote: Total 2 (delta 1), reused 2 (delta 1)
 	Unpacking objects: 100% (2/2), done.
-	From https://github.com/devinehowest/git-demo
+	From https://github.com/devinekask/git-demo
 	   58096ca..59bfb66  master     -> origin/master
 	First, rewinding head to replay your work on top of it...
 	Applying: removed project2.txt
 
-Op deze manier wordt er geen merge commit aangemaakt. Wanneer je een git status uitvoert, zie je dat je nu maar 1 commit voorsprong hebt op de remote repository, in plaats van 2:
+Op deze manier wordt er geen merge commit aangemaakt. Wanneer je een `git status` uitvoert, zie je dat je nu maar 1 commit voorsprong hebt op de remote repository, in plaats van 2:
 
 	project2$ git status
 	# On branch master
@@ -732,7 +732,7 @@ Pas in de project map de tekst aan in hello.txt en push deze naar de remote repo
 	Compressing objects: 100% (2/2), done.
 	Writing objects: 100% (3/3), 303 bytes, done.
 	Total 3 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	   487257a..7f3b200  master -> master
 
 Pas nu ook in de project2 map de tekst in dezelfde file aan en probeer te pushen:
@@ -743,9 +743,9 @@ Pas nu ook in de project2 map de tekst in dezelfde file aan en probeer te pushen
 	[master 599d7b0] changed hello.txt in project2
 	 1 file changed, 1 insertion(+), 1 deletion(-)
 	project2$ git push
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	 ! [rejected]        master -> master (non-fast-forward)
-	error: failed to push some refs to 'https://github.com/devinehowest/git-demo'
+	error: failed to push some refs to 'https://github.com/devinekask/git-demo'
 	hint: Updates were rejected because the tip of your current branch is behind
 	hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
 	hint: before pushing again.
@@ -758,7 +758,7 @@ We moeten eerst nog pullen, voor we kunnen pushen:
 	remote: Compressing objects: 100% (2/2), done.
 	remote: Total 3 (delta 0), reused 3 (delta 0)
 	Unpacking objects: 100% (3/3), done.
-	From https://github.com/devinehowest/git-demo
+	From https://github.com/devinekask/git-demo
 	   487257a..7f3b200  master     -> origin/master
 	First, rewinding head to replay your work on top of it...
 	Applying: changed hello.txt in project2
@@ -832,7 +832,7 @@ Nu kan je opnieuw pushen naar de remote:
 	Compressing objects: 100% (2/2), done.
 	Writing objects: 100% (3/3), 326 bytes, done.
 	Total 3 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinehowest/git-demo
+	To https://github.com/devinekask/git-demo
 	   7f3b200..920c81f  master -> master
 
 Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
