@@ -848,7 +848,7 @@ Je kan branches toevoegen om:
 
 Dit is een walkthrough om te werken met 2 branches, namelijk `develop` en `master` branches. Op de `master` branch kan je de production ready code terugvinden. Op de `develop` branch daarentegen kan je code pushen die nog niet volledig klaar is om aan je eindgebruiker te tonen.
 
-Vanaf het moment dat je tevreden bent met de (bugvrije) code in de `develop` branch, kan je deze "verplaatsen" naar de `master` branch. Dit proces wordt verder uitgelegd.
+Vanaf het moment dat je tevreden bent met de (bugvrije) code in de `develop` branch, kan je deze "mergen" naar de `master` branch. Dit proces wordt verder uitgelegd.
 
 Begin met een nieuwe git repository aan te maken.
 
