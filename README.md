@@ -854,7 +854,7 @@ Begin met een nieuwe git repository aan te maken.
 
 Voeg daarna een commit toe met een `README.md` bestand.
 
-Maak dan een branch `develop` aan door volgende commando uit te voeren:
+Maak dan een branch `develop` aan door het volgende commando uit te voeren:
 
 	$ git branch develop
 
@@ -872,7 +872,7 @@ Push deze `develop` branch naar remote en bekijk het resultaat op GitHub:
 
 Doe enkele commits op de `develop` branch. Je kan deze tussendoor gerust pushen naar Github (via `git push origin develop`).
 
-We zouden nu graag onze code van `develop` mergen met onze `master` code. Hiervoor moeten we eerst terugswitch naar onze `master` branch om in een volgende stap `develop` erin te mergen:
+We zouden nu graag onze code van `develop` mergen met onze `master` code, zodat beide branches dezelfde code bevatten (nu heeft `develop` namelijk meer commits dan `master`, oftewel `develop` staat voor op `master`). Hiervoor moeten we eerst terugswitchen naar onze `master` branch om in een volgende stap `develop` erin te mergen:
 
 	$ git checkout master
 
