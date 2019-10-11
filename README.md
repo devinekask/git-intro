@@ -38,7 +38,7 @@ Wanneer je meerdere files hebt met dezelfde inhoud, dan zal in de tree meerdere 
 
 We zullen git gebruiken vanaf de command line. Er zijn wel enkele applicaties die toelaten om via een GUI git commando's uit te voeren, maar wanneer je meer geavanceerde acties wil uitvoeren zul je sowieso terug moeten grijpen naar de command line.
 
-Git wordt mee geïntalleerd wanneer je de xcode command line tools installeert. Indien je dit dus reeds gedaan hebt (bijvoorbeeld om nodejs te laten werken), dan kun je meteen aan de slag. Een andere optie (zonder de command line tools) is git downloaden en installeren van op [http://git-scm.com/downloads](http://git-scm.com/downloads).
+Git wordt mee geïntalleerd wanneer je de xcode command line tools installeert. Indien je dit dus reeds gedaan hebt (bijvoorbeeld om Node.js te laten werken), dan kun je meteen aan de slag. Een andere optie (zonder de command line tools) is git downloaden en installeren van op [http://git-scm.com/downloads](http://git-scm.com/downloads).
 
 ### Werken in Terminal
 
@@ -62,7 +62,7 @@ Je kan ook output van een commando wegschrijven naar een bestand, door gebruik t
 * `ls > test.txt` zal de output van het ls commando wegschrijven in een bestand met de naam test.txt.
 * `echo "hello world" > hello.txt` zal de output van het echo commando (de tekst "hello world") wegschrijven in een bestand met de naam hello.txt.
 
-Dit zijn enkele basiscommando's die je als je broekzak moet kennen. Dit is niets git-specifiek! Je zal deze commando's ook gebruiken wanneer je later aan de slag gaat met nodejs en grunt.
+Dit zijn enkele basiscommando's die je als je broekzak moet kennen. Dit is niets git-specifiek! Je zal deze commando's ook gebruiken wanneer je aan de slag gaat met Node.js en Webpack.
 
 ### Aanmaken van een nieuwe git-repository
 
