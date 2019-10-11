@@ -841,7 +841,7 @@ Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
 ## Git branches
 Via Git kan je ook gebruik maken van branches.
 
-Je kan gebruik maken van branches om:
+Je kan branches toevoegen om:
 - Nieuwe features te ontwikkelen
 - Bugs te fixen
 - Te experimenteren met nieuwe ideeën zonder je production code (code die online staat) te beïnvloeden
