@@ -446,7 +446,7 @@ Add & commit nu deze deletes, door de flag -A te gebruiken bij je add:
 
 We hebben zopas een commit aangemaakt, waarin deze `node_modules` opnieuw verwijderd worden. Er is echter nog steeds een commit waarin deze `node_modules` wél aanwezig zijn, wat onze repository onnodig groot maakt. Indien je mappen of bestanden wil verwijderen uit de volledige historiek van je project, dan moet je nog een stap verder gaan.
 
-Via het git filter-branch commando kun je de git historiek aanpassen. Om onze `node_modules` map te wissen, doen we het volgende:
+Via het git `filter-branch` commando kun je de git historiek aanpassen. Om onze `node_modules` map te wissen, doen we het volgende:
 
 	$ git filter-branch --tree-filter 'rm -rf node_modules' HEAD
 
