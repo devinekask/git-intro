@@ -365,7 +365,7 @@ Wanneer je nu opnieuw git log uitvoert, zie je dat de commits na a528 verdwenen 
 Zo'n `git reset` commando ga je enkel gebruiken om lokale commits ongedaan te maken. Eens je samenwerkt met anderen, en commits reeds verspreid zijn onder andere users, dan gebruik je het `git revert` commando om een nieuwe commit te maken die een vorige commit ongedaan maakt.
 
 ## Bestanden negeren
-Het zal niet nodig zijn om alle bestanden in een projectmap bij te houden via Git. Zo is het bijvoorbeeld geen goed idee om een node_modules map te tracken in je repository. Ook verborgen systeembestanden, zoals .DS_Store hebben geen enkel nut in een repository.
+Het zal niet nodig zijn om alle bestanden in een projectmap bij te houden via Git. Zo is het bijvoorbeeld geen goed idee om een `node_modules` map te tracken in je repository. Ook verborgen systeembestanden, zoals `.DS_Store` hebben geen enkel nut in een repository.
 
 Initialiseer je map als een node project, en koppel bijvoorbeeld webpack aan dit project:
 
@@ -374,7 +374,7 @@ $ yarn init -y
 $ yarn add webpack --dev
 ```
 
-We zullen nu "per ongeluk" node_modules committen, en kijken om dit nadien recht te zetten.
+We zullen nu "per ongeluk" `node_modules` committen, en kijken om dit nadien recht te zetten.
 
 ```bash
 $ git add .
@@ -395,7 +395,7 @@ $ git commit -m "initial project"
 
 ### Bestanden wissen
 
-Je hebt nu het volledige project, inclusief de node_modules toegevoegd aan je git repository.
+Je hebt nu het volledige project, inclusief de `node_modules` toegevoegd aan je git repository.
 
 Dit is overkill, het is niet nodig om de volledige dependency tree mee op te slaan in je git repository. We zullen deze fout nu rechtzetten:
 
@@ -444,30 +444,30 @@ Add & commit nu deze deletes, door de flag -A te gebruiken bij je add:
 
 ### Bestanden & mappen verwijderen uit je volledige historiek
 
-We hebben zopas een commit aangemaakt, waarin deze node_modules opnieuw verwijderd worden. Er is echter nog steeds een commit waarin deze node_modules wél aanwezig zijn, wat onze repository onnodig groot maakt. Indien je mappen of bestanden wil verwijderen uit de volledige historiek van je project, dan moet je nog een stap verder gaan.
+We hebben zopas een commit aangemaakt, waarin deze `node_modules` opnieuw verwijderd worden. Er is echter nog steeds een commit waarin deze `node_modules` wél aanwezig zijn, wat onze repository onnodig groot maakt. Indien je mappen of bestanden wil verwijderen uit de volledige historiek van je project, dan moet je nog een stap verder gaan.
 
-Via het git filter-branch commando kun je de git historiek aanpassen. Om onze node_modules map te wissen, doen we het volgende:
+Via het git filter-branch commando kun je de git historiek aanpassen. Om onze `node_modules` map te wissen, doen we het volgende:
 
 	$ git filter-branch --tree-filter 'rm -rf node_modules' HEAD
 
-De map wordt gewist op je filesysteem én in de historiek. Let op, wanneer je via yarn opnieuw de node_modules koppelt, kun je ze per ongeluk opnieuw adden aan de historiek, wat niet de bedoeling is. We zullen dit vermijden met behulp van een .gitignore bestand.
+De map wordt gewist op je filesysteem én in de historiek. Let op, wanneer je via yarn opnieuw de `node_modules` koppelt, kun je ze per ongeluk opnieuw adden aan de historiek, wat niet de bedoeling is. We zullen dit vermijden met behulp van een `.gitignore` bestand.
 
 ### .gitignore
-We zullen nu specifieren welke files we in de toekomst niet meer willen tracken. Dit kan mbv een .gitignore file. Dit is een tekstbestand in je repository dat specifieert welke bestanden en mappen genegeerd mogen worden door git.
+We zullen nu specifieren welke files we in de toekomst niet meer willen tracken. Dit kan mbv een `.gitignore` file. Dit is een tekstbestand in je repository dat specifieert welke bestanden en mappen genegeerd mogen worden door git.
 
-Maak een nieuw bestand aan met de naam ".gitignore" (zonder de quotes weliswaar) in de root van je repository. Geef dit de volgende inhoud:
+Maak een nieuw bestand aan met de naam `.gitignore` in de root van je repository. Geef dit de volgende inhoud:
 
 	.DS_Store
 	node_modules/
 
-Dit zorgt ervoor dat het bestand .DS_Store en de map node_modules (& alle submappen van node_modules en submappen met deze naam) genegeerd worden in de toekomst.
+Dit zorgt ervoor dat het bestand `.DS_Store` en de map `node_modules` (& alle submappen van `node_modules` en submappen met deze naam) genegeerd worden in de toekomst.
 
 Add en commit dit bestand, zodat dit mee opgenomen wordt in je repository.
 
 	$ git add -A .
 	$ git commit -m "added .gitignore"
 
-In de praktijk zal je als één van je eerste bestanden zo'n .gitignore bestand aanmaken. Zo vermijd je dat je repository "vervuild" wordt met onnodige bestanden, en vermijd je ingrijpende acties zoals het verwijderen van mappen & bestanden uit de historiek.
+In de praktijk zal je als één van je eerste bestanden zo'n `.gitignore` bestand aanmaken. Zo vermijd je dat je repository "vervuild" wordt met onnodige bestanden, en vermijd je ingrijpende acties zoals het verwijderen van mappen & bestanden uit de historiek.
 
 ## Samenwerken met git
 
@@ -513,7 +513,7 @@ Het `git push` commando zal lokale, niet-gesynchronizeerde wijzigingen uploaden 
 
 ### Gitignore aanmaken
 
-Vergeet niet om meteen al een .gitignore bestand aan te maken, met onder andere ignores voor node_modules en .DS_Store. Zo vermijd je dat deze mappen en bestanden mee gesynchroniseerd worden!
+Vergeet niet om meteen al een `.gitignore` bestand aan te maken, met onder andere ignores voor `node_modules` en `.DS_Store`. Zo vermijd je dat deze mappen en bestanden mee gesynchroniseerd worden!
 
 ### Git add - commit - push
 
@@ -842,7 +842,7 @@ Doe een `git pull` in de andere map, zodat beide mappen terug in sync zijn.
 ## GIT branches
 Dit is een walkthrough om te werken met develop en master branches.
 
-Begin met een nieuwe git repository aan te maken. 
+Begin met een nieuwe git repository aan te maken.
 
 Voeg daarna een commit toe met een README bestand.
 
