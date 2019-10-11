@@ -862,7 +862,7 @@ Een overzicht van je branches kun je opvragen via deze commando:
 
 	$ git branch
 
-Switch naar de `develop` branch:
+Nu we een nieuwe `develop` branch hebben aangemaakt, kunnen we ernaar switchen door `git checkout develop` uit te voeren:
 
 	$ git checkout develop
 
@@ -870,17 +870,17 @@ Push deze `develop` branch naar remote en bekijk het resultaat op GitHub:
 
 	$ git push origin develop
 
-Doe enkele commits op de `develop` branch. Je kan deze tussendoor gerust pushen naar Github (via `git push origin develop`)
+Doe enkele commits op de `develop` branch. Je kan deze tussendoor gerust pushen naar Github (via `git push origin develop`).
 
-Switch terug naar `master` om in een volgende stap `develop` te mergen:
+We zouden nu graag onze code van `develop` mergen met onze `master` code. Hiervoor moeten we eerst terugswitch naar onze `master` branch om in een volgende stap `develop` erin te mergen:
 
 	$ git checkout master
 
-Merge `develop` into `master`:
+De merge van `develop` in `master` kan via een `git merge` commando:
 
 	$ git merge develop master
 
-Switch onmiddellijk terug naar `develop`, zodat je niet per ongeluk zit te ontwikkelen in de `master` branch:
+Switch onmiddellijk terug naar `develop`, zodat je niet per ongeluk zit te ontwikkelen in de `master` branch (we willen dat onze `develop` branch altijd de meest recente code bevat):
 
 	$ git checkout develop
 
@@ -889,11 +889,11 @@ Push de branches:
 	$ git push origin master
 	$ git push origin develop
 
-Alternatief is om ze allemaal ineens te pushen:
+Als alternatief kan je ze ook allemaal in één keer pushen:
 
 	$ git push --all origin
 
-Op andere locatie kun je dan de branches pullen:
+Op een andere locatie kun je dan de branches pullen (binnentrekken):
 
 	$ git pull --rebase origin develop
 	$ git pull --rebase origin master
