@@ -499,6 +499,7 @@ Add en commit dit bestand, zodat dit mee opgenomen wordt in je repository.
 	$ git commit -m "added .gitignore"
 
 In de praktijk zal je als één van je eerste bestanden zo'n `.gitignore` bestand aanmaken. Zo vermijd je dat je repository "vervuild" wordt met onnodige bestanden, en vermijd je ingrijpende acties zoals het verwijderen van mappen & bestanden uit de historiek.
+Voor een lijst van nuttige .gitignore files kan je hier terecht: https://github.com/github/gitignore
 
 ## Samenwerken met git
 
