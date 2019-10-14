@@ -1,3 +1,34 @@
+- [Git](#git)
+  * [Over Git](#over-git)
+  * [Interne werking](#interne-werking)
+  * [Een eerste repository](#een-eerste-repository)
+    + [Werken in Terminal](#werken-in-terminal)
+    + [Aanmaken van een nieuwe git-repository](#aanmaken-van-een-nieuwe-git-repository)
+    + [Bestanden tracken & committen](#bestanden-tracken---committen)
+    + [Bestanden wijzigen](#bestanden-wijzigen)
+    + [git add -A .](#git-add--a-)
+  * [Wijzigingen ongedaan maken](#wijzigingen-ongedaan-maken)
+    + [Wijzigingen vóór staging ongedaan maken](#wijzigingen-v--r-staging-ongedaan-maken)
+    + [Wijzigingen na staging ongedaan maken](#wijzigingen-na-staging-ongedaan-maken)
+    + [Commits ongedaan maken](#commits-ongedaan-maken)
+  * [Bestanden negeren](#bestanden-negeren)
+    + [Bestanden wissen](#bestanden-wissen)
+    + [Bestanden & mappen verwijderen uit je volledige historiek](#bestanden---mappen-verwijderen-uit-je-volledige-historiek)
+    + [.gitignore](#gitignore)
+  * [Samenwerken met git](#samenwerken-met-git)
+    + [Aanmaken & linken GitHub account](#aanmaken---linken-github-account)
+    + [Repository aanmaken & eerste push](#repository-aanmaken---eerste-push)
+    + [Gitignore aanmaken](#gitignore-aanmaken)
+    + [Git add - commit - push](#git-add---commit---push)
+    + [Bestaande repository binnenhalen](#bestaande-repository-binnenhalen)
+    + [push - pull](#push---pull)
+    + [rebase](#rebase)
+  * [Merge conflicts](#merge-conflicts)
+  * [Git branches](#git-branches)
+  * [Git Resources](#git-resources)
+
+
+
 # Git #
 ## Over Git ##
 Git is een versiebeheersysteem. Het laat je onder andere toe om met meerdere mensen samen te werken aan projecten en een historiek van het project bij te houden.
