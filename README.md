@@ -513,7 +513,7 @@ Daarom maken we gebruik van een hosted git omgeving. Hier zijn meerdere opties v
 
 We zullen eenmalig een GitHub account aanmaken en onze GitHub credentials linken aan onze computer, zodat we niet telkens opnieuw ons wachtwoord moeten ingeven.
 
-Surf naar [https://github.com](https://github.com) en maak een account aan. Ga daarna naar [https://education.github.com/pack#offers](https://education.github.com/pack#offers) en vraag een educational pack aan door te klikken op _Get your pack_, dit zal handig zijn om private repositories aan te maken.
+Surf naar [https://github.com](https://github.com) en maak een account aan. Ga daarna naar [https://education.github.com/pack](https://education.github.com/pack) en vraag een educational pack aan door te klikken op _Get your pack_, dit zal handig zijn om private repositories aan te maken.
 
 Open daarna een terminal window. We zullen onze naam & email adres koppelen aan git, zodat git weet wie een commit uitvoert. Zorg dat je email adres het adres is dat je gebruikte om je GitHub account aan te maken:
 
