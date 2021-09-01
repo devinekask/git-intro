@@ -643,7 +643,7 @@ In map 1 maken we een nieuw bestand `project.txt` aan, we adden, committen en pu
 	To https://github.com/frederikduchi/dev3-demo.git
 	   a8515e0..3dc1c52  main -> main
 
-In map 2 (dev3-demo) maken we een nieuw bestand `project2.txt` aan, doen we een add & commit en projecten we te pushen naar de remote:
+In map 2 (dev3-demo) maken we een nieuw bestand `project2.txt` aan, doen we een add & commit en proberen we te pushen naar de remote:
 
 	project2$ echo "created in project2" > project2.txt
 	project2$ git add .
