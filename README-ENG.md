@@ -1,26 +1,26 @@
 - [Git](#git)
-  * [Over Git](#over-git)
-  * [Interne werking](#interne-werking)
-  * [Een eerste repository](#een-eerste-repository)
-    + [Werken in Terminal](#werken-in-terminal)
-    + [Aanmaken van een nieuwe git-repository](#aanmaken-van-een-nieuwe-git-repository)
-    + [Bestanden tracken & committen](#bestanden-tracken---committen)
-    + [Bestanden wijzigen](#bestanden-wijzigen)
+  * [About Git](#over-git)
+  * [Internal operation](#interne-werking)
+  * [A first repository](#een-eerste-repository)
+    + [Working in Terminal](#werken-in-terminal)
+    + [Create a new git-repository](#aanmaken-van-een-nieuwe-git-repository)
+    + [Track & commit files](#bestanden-tracken---committen)
+    + [Modify files](#bestanden-wijzigen)
     + [git add -A .](#git-add--a-)
-  * [Wijzigingen ongedaan maken](#wijzigingen-ongedaan-maken)
-    + [Wijzigingen vóór staging ongedaan maken](#wijzigingen-v--r-staging-ongedaan-maken)
-    + [Wijzigingen na staging ongedaan maken](#wijzigingen-na-staging-ongedaan-maken)
-    + [Commits ongedaan maken](#commits-ongedaan-maken)
-  * [Bestanden negeren](#bestanden-negeren)
-    + [Bestanden wissen](#bestanden-wissen)
-    + [Bestanden & mappen verwijderen uit je volledige historiek](#bestanden---mappen-verwijderen-uit-je-volledige-historiek)
+  * [Undo changes](#wijzigingen-ongedaan-maken)
+    + [Undo changes before staging](#wijzigingen-v--r-staging-ongedaan-maken)
+    + [Undo changes after staging](#wijzigingen-na-staging-ongedaan-maken)
+    + [Undo commits](#commits-ongedaan-maken)
+  * [Ignore files](#bestanden-negeren)
+    + [Delete files](#bestanden-wissen)
+    + [Delete files & folders from the commit history](#bestanden---mappen-verwijderen-uit-je-volledige-historiek)
     + [.gitignore](#gitignore)
-  * [Samenwerken met git](#samenwerken-met-git)
-    + [Aanmaken & linken GitHub account](#aanmaken---linken-github-account)
-    + [Repository aanmaken & eerste push](#repository-aanmaken---eerste-push)
-    + [Gitignore aanmaken](#gitignore-aanmaken)
+  * [Collaboration with git](#samenwerken-met-git)
+    + [Create & link GitHub account](#aanmaken---linken-github-account)
+    + [Create repository & first push](#repository-aanmaken---eerste-push)
+    + [Create gitignore](#gitignore-aanmaken)
     + [Git add - commit - push](#git-add---commit---push)
-    + [Bestaande repository binnenhalen](#bestaande-repository-binnenhalen)
+    + [Pull existing repository](#bestaande-repository-binnenhalen)
     + [push - pull](#push---pull)
     + [rebase](#rebase)
   * [Merge conflicts](#merge-conflicts)
@@ -30,72 +30,72 @@
 
 
 # Git #
-## Over Git ##
-Git is een versiebeheersysteem. Het laat je onder andere toe om met meerdere mensen samen te werken aan projecten en een historiek van het project bij te houden.
+## About Git ##
+Git is a version control system. It allows you to collaborate on projects with several people and to keep a history of the project.
 
-Het werd gelanceerd in april 2005 door Linus Torvalds - de vader van Linux. Codebeheersystemen waren niets nieuws, enkele belangrijke systemen in het verleden waren:
+It was launched in April 2005 by Linus Torvalds - the father of Linux. Code management systems were nothing new, some important systems in the past were:
 
-* SCSS begin de jaren 70
-* RCS begin de jaren 80
-* CVS werd gelanceerd in 1986
+* SCSS early 1970s
+* RCS early 80s
+* CVS was launched in 1986
 * SVN in 2001
 
-De Linux ontwikkeling gebeurde in de beginjaren met Bitkeeper VCS. In 2005 legde Bitkeeper echter enkele extra restricties op aan de gratis open source versie, waardoor Linux niet langer via dit systeem ontwikkeld kon worden. Linus zocht naar alternatieven, maar vond er geen die voldeden aan z'n eisen:
+Linux development was done in the early years with Bitkeeper VCS. However, in 2005 Bitkeeper imposed some additional restrictions on the free open source version, so that Linux could no longer be developed via this system. Linus looked for alternatives, but found none that met his requirements:
 
-* Eenvoudig aan distributed development doen
-* Scalable zijn: met meer dan 1000 ontwikkelaars samen kunnen werken
-* Snel & Efficient en betrouwbaar zijn
-* Weten wie wat gedaan heeft
-* Ondersteuning voor transacties: meerdere acties bundelen
-* Branching ondersteuning: afsplitsingen van het project die terug samengevoegd kunnen worden met het hoofdproject.
-* Distributed repositories: project met historiek wordt niet centraal bijgehouden.
-* Gratis
+* Easy to do distributed development
+* Being scalable: being able to collaborate with 1000+ developers
+* Being Fast & Efficient and Reliable
+* Know who did what
+* Transaction support: bundle multiple actions
+* Branching support: branches of the project that can be merged back into the main project.
+* Distributed repositories: project with history is not kept centrally.
+* For free
 
-Toen hij geen alternatief vond die aan deze requirements voldeed besloot hij z'n eigen systeem te ontwikkelen: GIT was geboren.
+When he couldn't find an alternative that met these requirements, he decided to develop his own system: GIT was born.
 
-De naam GIT is geen afkorting, maar een verwijzing naar Linus zelf: het is slang voor "een onaangenaam persoon". Net zoals Linux, wou hij een naam die naar zichzelf verwijst. Nadien is er door de community de afkorting "Global Information Tracker" op geplakt.
+The name GIT is not an abbreviation, but a reference to Linus himself: it is slang for "an unpleasant person". Like Linux, he wanted a name that refers to himself. Afterwards, the community put the abbreviation "Global Information Tracker" on it.
 
-## Interne werking ##
+## Internal Operation ##
 
-Je bestanden worden opgeslaan in een repository. Deze repository bevat informatie over de inhoud van de bestanden, hun naam, locatie en de historiek.
+Your files are stored in a repository. This repository contains information about the contents of the files, their name, location and history.
 
-* de inhoud van bestanden wordt opgeslaan in blob objecten
-* de historiek wordt bijgehouden in commit objecten
-* de structuur wordt bijgehouden in tree objecten
+* the contents of files are stored in blob objects
+* history is kept in commit objects
+* the structure is maintained in tree objects
 
-Wanneer je meerdere files hebt met dezelfde inhoud, dan zal in de tree meerdere keren verwezen worden naar hetzelfde blob object, waardoor er plaats bespaard wordt.
+If you have multiple files with the same content, the tree will reference the same blob object multiple times, saving storage.
 
-## Een eerste repository
+## A first repository
 
-We zullen git gebruiken vanaf de command line. Er zijn wel enkele applicaties die toelaten om via een GUI git commando's uit te voeren, maar wanneer je meer geavanceerde acties wil uitvoeren zul je sowieso terug moeten grijpen naar de command line.
+We will use git from the command line. There are some applications that allow you to execute git commands via a GUI, but if you want to perform more advanced actions you will have to go back to the command line anyway.
 
-Git wordt mee geïntalleerd wanneer je de xcode command line tools installeert. Indien je dit dus reeds gedaan hebt (bijvoorbeeld om Node.js te laten werken), dan kun je meteen aan de slag. Een andere optie (zonder de command line tools) is git downloaden en installeren van op [http://git-scm.com/downloads](http://git-scm.com/downloads).
+Git is installed when you install the xcode command line tools. So if you have already done this (for example to make Node.js work), you can get started right away. Another option (without the command line tools) is to download and install git from [http://git-scm.com/downloads](http://git-scm.com/downloads).
 
-### Werken in Terminal
+### Working in Terminal
 
-Vooraleer we git specifieke commandos gaan gebruiken, zullen we even een korte opfrissing doen van enkele belangrijke Terminal commando's. Volgende commando's zou elke developer vlot moeten kunnen gebruiken:
+Before we start using git specific commands, let's do a quick refresher on some important Terminal commands. The following commands should be easy for any developer to use:
 
-* `ls`: Toon een lijst van bestanden en mappen in de actieve map. Indien je ook de verborgen bestanden & de bestandsattributen wil zien, kun je `ls -al` uitvoeren.
-* `cd naamvanmap`: Hiermee navigeer je naar de map met de naam die na het commando staat. Deze map wordt dan de actieve map in je Terminal. In dit voorbeeld navigeer je naar de map met de naam "naamvanmap". In plaats van een relatieve naam (dus een naam van een map die in de huidige actieve map staat), kun je ook een volledig pad invullen (beginnen met een forward slash). Tip: je kan vanuit je finder een map of bestand slepen naar het terminal venster om het volledige pad naar die map of bestand te plaatsen in het venster.
-* `cd ..`: Navigeer naar de bovenliggende map, zodat deze de actieve map wordt.
-* `mkdir naamvanmap`: maak een map aan met de naam gespecifieerd na het commando. In dit geval maak je een map aan met de naam "naamvanmap" in de actieve map.
-* `rm -d naamvanmap`: wis een bepaalde map. Dit lukt enkel als de map leeg is. Wanneer je een niet-lege map wil wissen, dan kun je extra opties gebruiken: `rm -rdf naamvanmap` zal de map inclusief submappen en files wissen.
-* `rm naamvanbestand`: wis een bepaald bestand.
-* `mv origineleneem nieuwenaam`: verplaats of hernoem een bestand. Je kan ook absolute / relatieve paden gebruiken om bestanden te verplaatsen naar een andere map.
-* `cp originelenaam nieuwenaam`: kopieer een bestand naar een nieuwe locatie.
-* `cat naamvanbestand`: toon de inhoud van een bepaald bestand in je terminal venster.
-* `echo "hello world"`: toon de tekst tussen de quotes in het terminal venster.
+* `ls`: Display a list of files and folders in the current folder. If you also want to see the hidden files & the file attributes, you can run `ls -al`.
+* `cd foldername`: Navigates to the folder named after the command. This folder will then become the active folder in your Terminal. In this example, navigate to the folder named "foldername". Instead of a relative name (ie a name of a folder that is in the current active folder), you can also enter a full path (starting with a forward slash). Tip: you can drag a folder or file from your finder to the terminal window to place the full path to that folder or file in the window.
+* `cd ..`: Navigate to the parent directory so that it becomes the active directory.
+* `mkdir foldername`: create a folder with the name specified after the command. In this case, create a folder called "foldername" in the active folder.
+* `rm -d foldername`: delete a particular folder. This only works if the folder is empty. If you want to delete a non-empty folder, you can use additional options: `rm -rdf foldername` will delete the folder including subfolders and files.
+* `rm filename`: delete a specific file.
+* `mv originalname newname`: move or rename a file. You can also use absolute / relative paths to move files to another folder.
+* `cp originalname newname`: copy a file to a new location.
+* `cat filename`: display the contents of a particular file in your terminal window.
+* `echo "hello world"`: display the text between the quotes in the terminal window.
 
-Door gebruik te maken van de `tab`-toets, kun je autocomplete triggeren op commando's of bestands en mapnamen. Typ een deel van het commando of een deel van het pad en druk op tab om automatisch aan te vullen. Zo kun je heel wat tijd besparen, en vermijd je bovendien typfouten.
+By using the `tab` key, you can trigger autocomplete on commands or file and folder names. Type part of the command or part of the path and press tab to autocomplete. This way you can save a lot of time, and you also avoid typing errors.
 
-Je kan ook output van een commando wegschrijven naar een bestand, door gebruik te maken van het `>` karakter:
+You can also write output from a command to a file, using the `>` character:
 
-* `ls > test.txt` zal de output van het ls commando wegschrijven in een bestand met de naam test.txt.
-* `echo "hello world" > hello.txt` zal de output van het echo commando (de tekst "hello world") wegschrijven in een bestand met de naam hello.txt.
+* `ls > test.txt` will write the output of the ls command to a file called test.txt.
+* `echo "hello world" > hello.txt` will write the output of the echo command (the text "hello world") to a file called hello.txt.
 
-Dit zijn enkele basiscommando's die je als je broekzak moet kennen. Dit is niets git-specifiek! Je zal deze commando's ook gebruiken wanneer je aan de slag gaat met Node.js en module bundlers zoals Gulp, Webpack of ViteJS.
+These are some basic commands you should know by head. This is nothing git specific! You will also use these commands when getting started with Node.js and module bundlers like Gulp, Webpack or ViteJS.
 
-### Aanmaken van een nieuwe git-repository
+### Create a new git-repository
 
 Je kan van elke bestaande map een git repository maken met het `git init` commando. Het maakt niet uit of hier al bestanden of submappen in aanwezig zijn. Wij zullen starten met een nieuwe lege map, maar weet dat dit niet nodig is om een project via git te beheren.
 
