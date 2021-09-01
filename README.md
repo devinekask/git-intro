@@ -145,7 +145,7 @@ Git laat ons weten dat er bestanden aanwezig zijn in je directory die nog niet b
 	# No commits yet
 	#
 	# Changes to be committed:
-	#   (use "git rm --cached <file>..." to unstage)
+	#   (use "git restore --staged <file>..." to unstage)
 	#
 	#	new file:   hello.txt
 	#
