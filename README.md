@@ -577,7 +577,7 @@ Maak een README.md bestand aan, met een beetje info over de repository:
 	 1 file changed, 1 insertion(+)
 	 create mode 100644 README.md
 
-Voer een `git status` uit. Je ziet in het status rapport dat de repository 2 commits achterstand heeft op de online versie:
+Voer een `git status` uit. Je ziet in het status rapport dat de repository 2 commits voorsprong heeft op de online versie:
 
 	# On branch master
 	# Your branch is ahead of 'origin/main' by 2 commits.
