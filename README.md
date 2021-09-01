@@ -535,16 +535,19 @@ Login op je GitHub account, en klik op de "New repository" button. Kies een naam
 
 Open een terminal venster en navigeer via `cd` commandos naar de map van de git repository met de "hello world" files. We zullen er voor zorgen dat we onze lokale repository via GitHub kunnen synchronizeren, door een "remote" te adden. Een remote is een locatie waarmee je een git repository kan synchronizeren:
 
-	$ git remote add origin https://github.com/devinekask/git-demo
-	$ git push -u origin master
-	Counting objects: 10, done.
-	Delta compression using up to 8 threads.
-	Compressing objects: 100% (4/4), done.
-	Writing objects: 100% (10/10), 742 bytes, done.
-	Total 10 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinekask/git-demo
-	 * [new branch]      master -> master
-	Branch master set up to track remote branch master from origin.
+	$ git remote add origin https://github.com/frederikduchi/dev3-demo.git
+	$ git branch -M main
+	$ git push -u origin main
+	Enumerating objects: 17, done.
+	Counting objects: 100% (17/17), done.
+	Delta compression using up to 12 threads
+	Compressing objects: 100% (10/10), done.
+	Writing objects: 100% (17/17), 8.98 KiB | 4.49 MiB/s, done.
+	Total 17 (delta 1), reused 0 (delta 0)
+	remote: Resolving deltas: 100% (1/1), done.
+	To https://github.com/frederikduchi/dev3-demo.git
+	 * [new branch]      main -> main
+	Branch 'main' set up to track remote branch 'main' from 'origin'.
 
 Het `git push` commando zal lokale, niet-gesynchronizeerde wijzigingen uploaden naar de remote lokatie. Het `-u` attribuut gebruik je de allereerste keer, om ervoor te zorgen dat je bij toekomstige synchonizaties de remote name niet meer moet opgeven. Je kan dan in de toekomst gewoon `git push` uitvoeren.
 
@@ -561,7 +564,7 @@ Wis het `world.txt` bestand, add & commit. We maken gebruik van `git add -u .` o
 	$ rm world.txt
 	$ git add -u .
 	$ git commit -m "removed world file"
-	[master 299abcd] removed world file
+	[master 0b0d3b8] removed world file
 	 1 file changed, 1 deletion(-)
 	 delete mode 100644 world.txt
 
@@ -570,26 +573,28 @@ Maak een README.md bestand aan, met een beetje info over de repository:
 	$ echo "Demo repository" > README.md
 	$ git add .
 	$ git commit -m "added readme file"
-	[master 9ed12bf] added readme file
+	[master a8515e0] added readme file
 	 1 file changed, 1 insertion(+)
 	 create mode 100644 README.md
 
 Voer een `git status` uit. Je ziet in het status rapport dat de repository 2 commits achterstand heeft op de online versie:
 
 	# On branch master
-	# Your branch is ahead of 'origin/master' by 2 commits.
-	#
+	# Your branch is ahead of 'origin/main' by 2 commits.
+	# (use "git push" to publish your local commits)
 	nothing to commit (working directory clean)
 
 Doe een `git push` om je commits op GitHub te plaatsen:
 
-	Counting objects: 6, done.
-	Delta compression using up to 8 threads.
-	Compressing objects: 100% (3/3), done.
-	Writing objects: 100% (5/5), 506 bytes, done.
-	Total 5 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinekask/git-demo
-	   a528ba5..9ed12bf  master -> master
+	Enumerating objects: 6, done.
+	Counting objects: 100% (6/6), done.
+	Delta compression using up to 12 threads
+	Compressing objects: 100% (4/4), done.
+	Writing objects: 100% (5/5), 488 bytes | 488.00 KiB/s, done.
+	Total 5 (delta 2), reused 0 (delta 0)
+	remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+	To https://github.com/frederikduchi/dev3-demo.git
+	   f1e8b69..a8515e0  main -> main
 
 Wanneer je de repository via je browser bekijkt, zal je zien dat de inhoud van de `README.md` file, getoond wordt onder de lijst van files. Dit is een bestand in het Markdown formaat. Markdown is een eenvoudige markup taal om documenten op te maken. Meer informatie hierover kan je onder andere vinden op wikipedia: [http://en.wikipedia.org/wiki/Markdown](http://en.wikipedia.org/wiki/Markdown).
 
@@ -600,15 +605,17 @@ Eens een repository aangemaakt is, en op een server zoals GitHub staat, kun je h
 Open een tweede terminal venster, navigeer naar de bovenliggende map van je originele git repository en maak een map aan waarin je een duplicaat van de repository zal clonen:
 
 	$ mkdir project2
+	$ cd project2
 
-Voer het git clone commando uit, om de online repository binnen te halen:
+Voer het git clone commando uit, om de online repository binnen te halen (wijzig wel de url naar die van je eigen repository:
 
-	$ git clone https://github.com/devinekask/git-demo project2
-	Cloning into 'project2'...
-	remote: Counting objects: 15, done.
-	remote: Compressing objects: 100% (7/7), done.
-	remote: Total 15 (delta 0), reused 15 (delta 0)
-	Unpacking objects: 100% (15/15), done.
+	$ git clone https://github.com/frederikduchi/dev3-demo
+	Cloning into 'dev3-demo'...
+	remote: Enumerating objects: 22, done.
+	remote: Counting objects: 100% (22/22), done.
+	remote: Compressing objects: 100% (11/11), done.
+	remote: Total 22 (delta 3), reused 22 (delta 3), pack-reused 0
+	Unpacking objects: 100% (22/22), done.
 
 Je hebt nu 2 clones van dezelfde repository op je computer. Eentje in de map project en eentje in de map project2. We zullen deze twee gebruiken om synchronisaties en merges te testen.
 
@@ -621,47 +628,53 @@ In map 1 maken we een nieuw bestand `project.txt` aan, we adden, committen en pu
 	project$ echo "created in project" > project.txt
 	project$ git add .
 	project$ git commit -m "added project.txt file"
-	[master a93634a] added project.txt
+	[main 3dc1c52] add project.txt file
 	 1 file changed, 1 insertion(+)
 	 create mode 100644 project.txt
+	 
 	project$ git push
-	Counting objects: 4, done.
-	Delta compression using up to 8 threads.
+	Enumerating objects: 4, done.
+	Counting objects: 100% (4/4), done.
+	Delta compression using up to 12 threads
 	Compressing objects: 100% (2/2), done.
-	Writing objects: 100% (3/3), 335 bytes, done.
-	Total 3 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinekask/git-demo
-	   9ed12bf..a93634a  master -> master
+	Writing objects: 100% (3/3), 300 bytes | 300.00 KiB/s, done.
+	Total 3 (delta 1), reused 0 (delta 0)
+	remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+	To https://github.com/frederikduchi/dev3-demo.git
+	   a8515e0..3dc1c52  main -> main
 
-In map 2 maken we een nieuw bestand `project2.txt` aan, doen we een add & commit en projecten we te pushen naar de remote:
+In map 2 (dev3-demo) maken we een nieuw bestand `project2.txt` aan, doen we een add & commit en projecten we te pushen naar de remote:
 
 	project2$ echo "created in project2" > project2.txt
 	project2$ git add .
 	project2$ git commit -m "added project2.txt file"
-	[master eac21f9] added project2.txt file
+	[master 3bdfe55] added project2.txt file
 	 1 file changed, 1 insertion(+)
 	 create mode 100644 project2.txt
 	project2$ git push
-	To https://github.com/devinekask/git-demo
-	 ! [rejected]        master -> master (non-fast-forward)
-	error: failed to push some refs to 'https://github.com/devinekask/git-demo'
-	hint: Updates were rejected because the tip of your current branch is behind
-	hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
-	hint: before pushing again.
+	To https://github.com/frederikduchi/dev3-demo
+	 ! [rejected]        main -> main (fetch first)
+	error: failed to push some refs to 'https://github.com/frederikduchi/dev3-demo'
+	hint: Updates were rejected because the remote contains work that you do
+	hint: not have locally. This is usually caused by another repository pushing
+	hint: to the same ref. You may want to first integrate the remote changes
+	hint: (e.g., 'git pull ...') before pushing again.
 	hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
 
 We krijgen een fout: er zijn nieuwe commits op de remote, die we nog niet hebben binnengehaald in onze project2 clone. We moeten deze eerst pullen, voor we een push kunnen doen:
 
 	project2$ git pull
 
-We krijgen een vim editor te zien om een merge uit te voeren. Je kan hier een custom message ingeven. Geef `:quit` in om de vim editor te sluiten en verder te doen met de merge.
+We krijgen een vim of nano editor te zien om een merge uit te voeren. Je kan hier een custom message ingeven. Geef `:quit` in om de vim editor te sluiten en verder te doen met de merge.
 
-	remote: Counting objects: 4, done.
-	remote: Compressing objects: 100% (2/2), done.
-	remote: Total 3 (delta 0), reused 3 (delta 0)
+	remote: Enumerating objects: 4, done.
+	remote: Counting objects: 100% (4/4), done.
+	remote: Compressing objects: 100% (1/1), done.
+	remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
 	Unpacking objects: 100% (3/3), done.
-	From https://github.com/devinekask/git-demo
-	   9ed12bf..a93634a  master     -> origin/master
+	From https://github.com/frederikduchi/dev3-demo
+	   a8515e0..3dc1c52  main       -> origin/main
 	Merge made by the 'recursive' strategy.
 	 project.txt | 1 +
 	 1 file changed, 1 insertion(+)
@@ -670,32 +683,36 @@ We krijgen een vim editor te zien om een merge uit te voeren. Je kan hier een cu
 Wanneer je een `git status` uitvoert, zal je zien dat je 2 commits voor bent op de remote: 1 commit is de merge commit, en een tweede commit is de `project2.txt` commit:
 
 	project2$ git status
-	# On branch master
-	# Your branch is ahead of 'origin/master' by 2 commits.
+	# On branch main
+	# Your branch is ahead of 'origin/main' by 2 commits.
 	#
 	nothing to commit (working directory clean)
 
 Doe opnieuw een push van die commits naar de remote. Het pushen lukt deze keer wel:
 
 	project2$ git push
-	Counting objects: 7, done.
-	Delta compression using up to 8 threads.
+	Enumerating objects: 7, done.
+	Counting objects: 100% (7/7), done.
+	Delta compression using up to 12 threads
 	Compressing objects: 100% (4/4), done.
-	Writing objects: 100% (5/5), 546 bytes, done.
+	Writing objects: 100% (5/5), 551 bytes | 551.00 KiB/s, done.
 	Total 5 (delta 2), reused 0 (delta 0)
-	To https://github.com/devinekask/git-demo
-	   a93634a..58096ca  master -> master
+	remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+	To https://github.com/frederikduchi/dev3-demo
+	   3dc1c52..c18628a  main -> main
 
-Haal nu deze commits ook op in je eerste map via een `git pull` commando:
+
+Haal nu deze commits ook op in je eerste map (niet vergeten van map te wisselen dus) via een `git pull` commando:
 
 	project$ git pull
-	remote: Counting objects: 7, done.
+	remote: Enumerating objects: 7, done.
+	remote: Counting objects: 100% (7/7), done.
 	remote: Compressing objects: 100% (2/2), done.
-	remote: Total 5 (delta 2), reused 5 (delta 2)
+	remote: Total 5 (delta 2), reused 5 (delta 2), pack-reused 0
 	Unpacking objects: 100% (5/5), done.
-	From https://github.com/devinekask/git-demo
-	   a93634a..58096ca  master     -> origin/master
-	Updating a93634a..58096ca
+	From https://github.com/frederikduchi/dev3-demo
+	   3dc1c52..c18628a  main       -> origin/main
+	Updating 3dc1c52..c18628a
 	Fast-forward
 	 project2.txt | 1 +
 	 1 file changed, 1 insertion(+)
@@ -712,41 +729,47 @@ Doe een delete van `project.txt` in de project map:
 	project$ rm project.txt
 	project$ git add -u .
 	project$ git commit -m "removed project.txt"
-	[master 59bfb66] removed project.txt
+	[main de80b79] removed project.txt
 	 1 file changed, 1 deletion(-)
 	 delete mode 100644 project.txt
 	project$ git push
-	Counting objects: 3, done.
-	Delta compression using up to 8 threads.
+	Enumerating objects: 3, done.
+	Counting objects: 100% (3/3), done.
+	Delta compression using up to 12 threads
 	Compressing objects: 100% (2/2), done.
-	Writing objects: 100% (2/2), 230 bytes, done.
+	Writing objects: 100% (2/2), 233 bytes | 233.00 KiB/s, done.
 	Total 2 (delta 1), reused 0 (delta 0)
-	To https://github.com/devinekask/git-demo
-	   58096ca..59bfb66  master -> master
+	remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+	To https://github.com/frederikduchi/dev3-demo.git
+	   c18628a..de80b79  main -> main
 
 Doe daarna een delete van `project2.txt` in de `project2` map. We zullen ook hier eerst een pull moeten doen voordat we kunnen pushen. Het verschil bij de pull is dat we een rebase flag meegeven, om ervoor te zorgen dat eerst alle commits van de remote repository uitgevoerd worden, en daarna onze eigen commits:
 
 	project2$ rm project2.txt
 	project2$ git add -u .
 	project2$ git commit -m "removed project2.txt"
-	[master 9cae76e] removed project2.txt
+	[main 6be65fb] removed project2.txt
 	 1 file changed, 1 deletion(-)
 	 delete mode 100644 project2.txt
+	 
 	project2$ git pull --rebase
-	remote: Counting objects: 3, done.
+	remote: Enumerating objects: 3, done.
+	remote: Counting objects: 100% (3/3), done.
 	remote: Compressing objects: 100% (1/1), done.
-	remote: Total 2 (delta 1), reused 2 (delta 1)
+	remote: Total 2 (delta 1), reused 2 (delta 1), pack-reused 0
 	Unpacking objects: 100% (2/2), done.
-	From https://github.com/devinekask/git-demo
-	   58096ca..59bfb66  master     -> origin/master
+	From https://github.com/frederikduchi/dev3-demo
+	   c18628a..de80b79  main       -> origin/main
 	First, rewinding head to replay your work on top of it...
 	Applying: removed project2.txt
+
 
 Op deze manier wordt er geen merge commit aangemaakt. Wanneer je een `git status` uitvoert, zie je dat je nu maar 1 commit voorsprong hebt op de remote repository, in plaats van 2:
 
 	project2$ git status
-	# On branch master
-	# Your branch is ahead of 'origin/master' by 1 commit.
+	# On branch main
+	# Your branch is ahead of 'origin/main' by 1 commit.
+	  (use "git push" to publish your local commits)
 	#
 	nothing to commit (working directory clean)
 
@@ -754,82 +777,86 @@ Push naar de remote repository. Doe ook opnieuw een pull in de project map, zoda
 
 ## Merge conflicts
 
-Tot nu toe hebben we braafjes in aparte files wijzigingen aangebracht. Het kan echter gebruiken dat je met 2 personen in dezelfde file wijzigingen hebt aangebracht, en dat er een conflict optreedt.
+Tot nu toe hebben we braafjes in aparte files wijzigingen aangebracht. Het kan echter gebeuren dat je met 2 personen in dezelfde file wijzigingen hebt aangebracht, en dat er een conflict optreedt.
 
 Pas in de `project` map de tekst aan in `hello.txt` en push deze naar de remote repository:
 
 	project$ echo "edit in project" > hello.txt
 	project$ git add .
 	project$ git commit -m "changed hello.txt"
-	[master 7f3b200] changed hello.txt
+	[main f1c4e08] changed hello.txt
 	 1 file changed, 1 insertion(+), 1 deletion(-)
+	 
 	project$ git push
-	Counting objects: 5, done.
-	Delta compression using up to 8 threads.
+	Enumerating objects: 5, done.
+	Counting objects: 100% (5/5), done.
+	Delta compression using up to 12 threads
 	Compressing objects: 100% (2/2), done.
-	Writing objects: 100% (3/3), 303 bytes, done.
-	Total 3 (delta 0), reused 0 (delta 0)
-	To https://github.com/devinekask/git-demo
-	   487257a..7f3b200  master -> master
+	Writing objects: 100% (3/3), 284 bytes | 284.00 KiB/s, done.
+	Total 3 (delta 1), reused 0 (delta 0)
+	remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+	To https://github.com/frederikduchi/dev3-demo.git
+	   8f2400d..f1c4e08  main -> main
 
 Pas nu ook in de `project2` map de tekst in dezelfde file aan en probeer te pushen:
 
 	project2$ echo "edit in project2" > hello.txt
 	project2$ git add .
 	project2$ git commit -m "changed hello.txt in project2"
-	[master 599d7b0] changed hello.txt in project2
+	[main 45b7ea9] chenged hello.txt in project2
 	 1 file changed, 1 insertion(+), 1 deletion(-)
+	 
 	project2$ git push
-	To https://github.com/devinekask/git-demo
-	 ! [rejected]        master -> master (non-fast-forward)
-	error: failed to push some refs to 'https://github.com/devinekask/git-demo'
-	hint: Updates were rejected because the tip of your current branch is behind
-	hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
-	hint: before pushing again.
+	To https://github.com/frederikduchi/dev3-demo
+	 ! [rejected]        main -> main (fetch first)
+	error: failed to push some refs to 'https://github.com/frederikduchi/dev3-demo'
+	hint: Updates were rejected because the remote contains work that you do
+	hint: not have locally. This is usually caused by another repository pushing
+	hint: to the same ref. You may want to first integrate the remote changes
+	hint: (e.g., 'git pull ...') before pushing again.
 	hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 We moeten eerst nog pullen, voor we kunnen pushen:
 
 	project2$ git pull --rebase
-	remote: Counting objects: 5, done.
-	remote: Compressing objects: 100% (2/2), done.
-	remote: Total 3 (delta 0), reused 3 (delta 0)
+	remote: Enumerating objects: 5, done.
+	remote: Counting objects: 100% (5/5), done.
+	remote: Compressing objects: 100% (1/1), done.
+	remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
 	Unpacking objects: 100% (3/3), done.
-	From https://github.com/devinekask/git-demo
-	   487257a..7f3b200  master     -> origin/master
+	From https://github.com/frederikduchi/dev3-demo
+	   8f2400d..f1c4e08  main       -> origin/main
 	First, rewinding head to replay your work on top of it...
-	Applying: changed hello.txt in project2
+	Applying: chenged hello.txt in project2
 	Using index info to reconstruct a base tree...
 	M	hello.txt
 	Falling back to patching base and 3-way merge...
 	Auto-merging hello.txt
 	CONFLICT (content): Merge conflict in hello.txt
-	Failed to merge in the changes.
-	Patch failed at 0001 changed hello.txt in project2
-	The copy of the patch that failed is found in:
-	   /Users/wouter/Documents/project2/.git/rebase-apply/patch
+	error: Failed to merge in the changes.
+	Patch failed at 0001 chenged hello.txt in project2
+	hint: Use 'git am --show-current-patch' to see the failed patch
+	Resolve all conflicts manually, mark them as resolved with
+	"git add/rm <conflicted_files>", then run "git rebase --continue".
+	You can instead skip this commit: run "git rebase --skip".
+	To abort and get back to the state before "git rebase", run "git rebase --abort".
 
-	When you have resolved this problem, run "git rebase --continue".
-	If you prefer to skip this patch, run "git rebase --skip" instead.
-	To check out the original branch and stop rebasing, run "git rebase --abort".
 
-We krijgen een merge conflict, doordat we in beide repositories dezelfde file wijzigden. We moeten eerst dit conflict oplossen, voordate de rebase kan verderdoen.
+We krijgen een merge conflict, doordat we in beide repositories dezelfde file wijzigden. We moeten eerst dit conflict oplossen, voor dat de rebase kan verderdoen.
 
 Via `git status` kun je een lijst opvragen met de merge conflicts:
 
 	project2$ git status
-	# Not currently on any branch.
-	# You are currently rebasing.
-	#   (fix conflicts and then run "git rebase --continue")
-	#   (use "git rebase --skip" to skip this patch)
-	#   (use "git rebase --abort" to check out the original branch)
+	#rebase in progress; onto f1c4e08
+	#You are currently rebasing branch 'main' on 'f1c4e08'.
+	#  (fix conflicts and then run "git rebase --continue")
+	#  (use "git rebase --skip" to skip this patch)
+	#  (use "git rebase --abort" to check out the original branch)
 	#
-	# Unmerged paths:
-	#   (use "git reset HEAD <file>..." to unstage)
-	#   (use "git add <file>..." to mark resolution)
-	#
-	#	both modified:      hello.txt
-	#
+	#Unmerged paths:
+	#  (use "git restore --staged <file>..." to unstage)
+	#  (use "git add <file>..." to mark resolution)
+	#	both modified:   hello.txt
 	no changes added to commit (use "git add" and/or "git commit -a")
 
 Je krijgt de melding dat je aan het rebasen bent. Bij "Unmerged paths" zie je de files die in conflict zijn. Je moet eerste het conflict oplossen, door de file te editen, voor je kan verder doen met de rebase.
@@ -853,11 +880,11 @@ Add deze aan de rebase actie en continue:
 	project2$ git rebase --continue
 	Applying: changed hello.txt in project2
 
-Wanneer je nu een git status uitvoert, zal je zien dat je opnieuw op de master branch zit, en 1 commit voorsprong hebt op de remote:
+Wanneer je nu een git status uitvoert, zal je zien dat je opnieuw op de master / main branch zit, en 1 commit voorsprong hebt op de remote:
 
 	project2$ git status
-	# On branch master
-	# Your branch is ahead of 'origin/master' by 1 commit.
+	# On branch main
+	# Your branch is ahead of 'origin/main' by 1 commit.
 	#
 	nothing to commit (working directory clean)
 
@@ -887,9 +914,7 @@ Dit is een walkthrough om te werken met 2 branches, namelijk `develop` en `maste
 
 Vanaf het moment dat je tevreden bent met de (bugvrije) code in de `develop` branch, kan je deze "mergen" naar de `master` branch. Dit proces wordt verder uitgelegd.
 
-Begin met een nieuwe git repository aan te maken.
-
-Voeg daarna een commit toe met een `README.md` bestand.
+Je werkt verder op het huidige project.
 
 Maak dan een branch `develop` aan door het volgende commando uit te voeren:
 
@@ -911,11 +936,11 @@ Doe enkele commits op de `develop` branch. Je kan deze tussendoor gerust pushen 
 
 We zouden nu graag onze code van `develop` mergen met onze `master` code, zodat beide branches dezelfde code bevatten (nu heeft `develop` namelijk meer commits dan `master`, oftewel `develop` staat voor op `master` - bekijk dit verschil ook eens in Github). Hiervoor moeten we eerst terugswitchen naar onze `master` branch om in een volgende stap `develop` erin te mergen:
 
-	$ git checkout master
+	$ git checkout main
 
 De merge van `develop` in `master` kan via een `git merge` commando:
 
-	$ git merge develop master
+	$ git merge develop main
 
 Switch onmiddellijk terug naar `develop`, zodat je niet per ongeluk zit te ontwikkelen in de `master` branch (we willen dat onze `develop` branch altijd de meest recente code bevat):
 
@@ -923,7 +948,7 @@ Switch onmiddellijk terug naar `develop`, zodat je niet per ongeluk zit te ontwi
 
 Push de branches:
 
-	$ git push origin master
+	$ git push origin main
 	$ git push origin develop
 
 Als alternatief kan je ze ook allemaal in één keer pushen:
@@ -933,7 +958,7 @@ Als alternatief kan je ze ook allemaal in één keer pushen:
 Op een andere locatie kun je dan de branches pullen (binnentrekken):
 
 	$ git pull --rebase origin develop
-	$ git pull --rebase origin master
+	$ git pull --rebase origin main
 
 ## Git Resources
 
