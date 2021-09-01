@@ -250,15 +250,15 @@ Voer een git status uit, git heeft changes gedetecteerd die nog niet staged for 
 	# On branch master
 	# Changes not staged for commit:
 	#   (use "git add <file>..." to update what will be committed)
-	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#   (use "git restore <file>..." to discard changes in working directory)
 	#
 	#	modified:   hello.txt
 	#
 	no changes added to commit (use "git add" and/or "git commit -a")
 
-Je krijgt hier al een hint hoe je de wijzigingen in je working directory kunt ongedaan maken: via het git checkout commando. Voer dit commando uit, en controleer de status van de repository:
+Je krijgt hier al een hint hoe je de wijzigingen in je working directory kunt ongedaan maken: via het git restore commando. Voer dit commando uit, en controleer de status van de repository:
 
-	$ git checkout hello.txt
+	$ git restore hello.txt
 	$ git status
 	# On branch master
 	nothing to commit (working directory clean)
@@ -266,7 +266,7 @@ Je krijgt hier al een hint hoe je de wijzigingen in je working directory kunt on
 De wijzigingen aan hello.txt zijn ongedaan gemaakt. Als je de inhoud van de file bekijkt via het cat commando, zul je zien dat deze de inhoud bevat van je laatste commit:
 
 	$ cat hello.txt
-	hello cp3
+	hello development 3
 
 ### Wijzigingen na staging ongedaan maken
 
@@ -277,16 +277,14 @@ Pas de tekst opnieuw aan naar "hello devine", stage deze wijzigingen via het add
 	$ git status
 	# On branch master
 	# Changes to be committed:
-	#   (use "git reset HEAD <file>..." to unstage)
+	#   (use "git restore --staged <file>..." to unstage)
 	#
 	#	modified:   hello.txt
 	#
 
-Je krijgt een hint hoe je deze wijzigingen kunt unstagen: via git reset HEAD:
+Je krijgt een hint hoe je deze wijzigingen kunt unstagen: via git restore --staged:
 
-	$ git reset HEAD hello.txt
-	Unstaged changes after reset:
-	M	hello.txt
+	$ git restore --staged hello.txt
 
 De file is nog steeds gewijzigd, maar de wijzigingen zijn niet meer gestaged:
 
@@ -302,7 +300,7 @@ De file is nog steeds gewijzigd, maar de wijzigingen zijn niet meer gestaged:
 
 Je kunt deze nu definitief ongedaan maken, door - net zoals in voorgaande topic - git checkout te gebruiken:
 
-	$ git checkout hello.txt
+	$ git restore hello.txt
 
 ### Commits ongedaan maken
 
@@ -316,9 +314,9 @@ Je kan 2 dingen doen: ofwel een nieuwe commit maken die de wijzigingen uit de vo
 
 	$ git revert HEAD
 
-Je terminal zal nu een vim editor tonen, waarin je een commit message kan typen. Pas eventueel de default message aan, en typ `:quit` wanneer je klaar bent.
+Je terminal zal nu een vim of nano editor tonen, waarin je een commit message kan typen. Pas eventueel de default message aan, en typ in vim `:quit` wanneer je klaar bent. Voor nano gebruik je Ctrl + X, gevolgd door Yes.
 
-	[master ad78401] Revert "changed, but not sure about it"
+	[master 2bc740f] Revert "changed, but not sure about it"
 	 1 file changed, 1 insertion(+), 1 deletion(-)
 
 De file zal nu de inhoud bevatten van voor de laatste commit.
@@ -332,65 +330,72 @@ git config --global core.editor "nano"
 Je kan trouwens de commit historiek van een repository bekijken via het `git log` commando:
 
 	$ git log
-	commit ad78401ab771bea7425e08b9dc1a68fd96fb5bbf
-	Author: Wouter Verweirder <wouter@aboutme.be>
-	Date:   Wed Nov 6 09:53:16 2013 +0100
+	commit 2bc740f2af93348267c6b3558e1037c5db540600 (HEAD -> master)
+	Author: Frederik Duchi <frederik.duchi@howest.be>
+	Date:   Wed Sep 1 09:57:33 2021 +0200
 
 	    Revert "changed, but not sure about it"
 
-	    This reverts commit f7e3f95692171c5c6dd6a9314f3acfc7354c3559.
+	    This reverts commit 8d977cb2d4855a782e261015645e017c1e128000.
 
-	commit f7e3f95692171c5c6dd6a9314f3acfc7354c3559
-	Author: Wouter Verweirder <wouter@aboutme.be>
-	Date:   Wed Nov 6 09:42:31 2013 +0100
+	commit 8d977cb2d4855a782e261015645e017c1e128000
+	Author: Frederik Duchi <frederik.duchi@howest.be>
+	Date:   Wed Sep 1 09:56:55 2021 +0200
 
 	    changed, but not sure about it
 
-	commit a528ba56e7da390e37e28b1c9af938ba84f82c10
-	Author: Wouter Verweirder <wouter@aboutme.be>
-	Date:   Tue Nov 5 17:41:41 2013 +0100
+	commit 5aa411822d8546ef1cd73addc20a022a74deae91
+	Author: Frederik Duchi <frederik.duchi@howest.be>
+	Date:   Wed Sep 1 09:54:26 2021 +0200
 
-	    welcome cp3 + new world file
+	    changed, but not sure about it
 
-	commit bd4b50051584138951ff43c332fffb5d1161d287
-	Author: Wouter Verweirder <wouter@aboutme.be>
-	Date:   Tue Nov 5 12:06:28 2013 +0100
+	commit 9720321677e0798b540b287398edeaadcb630b17
+	Author: Frederik Duchi <frederik.duchi@howest.be>
+	Date:   Wed Sep 1 09:35:21 2021 +0200
+
+	    welcome dev3 + new world file
+
+	commit 7f65053ee86593fb29a3102e03f7ae3f44b112d7
+	Author: Frederik Duchi <frederik.duchi@howest.be>
+	Date:   Wed Sep 1 09:32:22 2021 +0200
 
 	    world gewijzigd naar devine
 
-	commit 860a90914f97666fd0020713b564467ca89b749d
-	Author: Wouter Verweirder <wouter@aboutme.be>
-	Date:   Tue Nov 5 11:45:20 2013 +0100
+	commit 5588c399cd15bc841c89158d72cc4d3938581196
+	Author: Frederik Duchi <frederik.duchi@howest.be>
+	Date:   Wed Sep 1 09:30:22 2021 +0200
 
 	    eerste commit
+
 
 Je ziet dat de "foute" commit nog steeds in de git historiek aanwezig is, en dat de wijzigingen via een nieuwe commit ongedaan gemaakt werden. Merk ook op dat elke commit een unieke SHA1-hash id heeft. Deze ids kun je gebruiken om commits te specifiëren bij bepaalde commano's.
 
 Een meer drastische manier om commits ongedaan te maken, is via het `git reset` commando. Via git reset ga je je working tree gaan resetten naar een bepaalde commit en alle commits na die commit wissen uit de repository.
 
-We willen terug naar de status gaan van onze commit "welcome cp3 + new world file". Via git log, komen we te weten dat het SHA1 id `a528ba56e7da390e37e28b1c9af938ba84f82c10` is. Specifieer het SHA1 id van de commit naar waar je wil resetten na het commando. Je hoeft niet het ganse id te specifiëren: de eerste 4 karakters zijn vaak voldoende (ten minste als deze uniek zijn):
+We willen terug naar de status gaan van onze commit "welcome dev3 + new world file". Via git log, komen we te weten dat het SHA1 id `9720321677e0798b540b287398edeaadcb630b17` is. Specifieer het SHA1 id van de commit naar waar je wil resetten na het commando. Je hoeft niet het ganse id te specifiëren: de eerste 4 karakters zijn vaak voldoende (ten minste als deze uniek zijn):
 
-	$ git reset --hard a528
-	HEAD is now at a528ba5 welcome cp3 + new world file
+	$ git reset --hard 9720
+	HEAD is now at 9720321 welcome dev3 + new world file
 
-Wanneer je nu opnieuw git log uitvoert, zie je dat de commits na a528 verdwenen zijn:
+Wanneer je nu opnieuw git log uitvoert, zie je dat de commits na 9720 verdwenen zijn:
 
 	$ git log
-	commit a528ba56e7da390e37e28b1c9af938ba84f82c10
-	Author: Wouter Verweirder <wouter@aboutme.be>
-	Date:   Tue Nov 5 17:41:41 2013 +0100
+	commit 9720321677e0798b540b287398edeaadcb630b17 (HEAD -> master)
+	Author: Frederik Duchi <frederik.duchi@telenet.be>
+	Date:   Wed Sep 1 09:35:21 2021 +0200
 
-	    welcome cp3 + new world file
+	    welcome dev3 + new world file
 
-	commit bd4b50051584138951ff43c332fffb5d1161d287
-	Author: Wouter Verweirder <wouter@aboutme.be>
-	Date:   Tue Nov 5 12:06:28 2013 +0100
+	commit 7f65053ee86593fb29a3102e03f7ae3f44b112d7
+	Author: Frederik Duchi <frederik.duchi@telenet.be>
+	Date:   Wed Sep 1 09:32:22 2021 +0200
 
 	    world gewijzigd naar devine
 
-	commit 860a90914f97666fd0020713b564467ca89b749d
-	Author: Wouter Verweirder <wouter@aboutme.be>
-	Date:   Tue Nov 5 11:45:20 2013 +0100
+	commit 5588c399cd15bc841c89158d72cc4d3938581196
+	Author: Frederik Duchi <frederik.duchi@telenet.be>
+	Date:   Wed Sep 1 09:30:22 2021 +0200
 
 	    eerste commit
 
@@ -402,8 +407,8 @@ Het zal niet nodig zijn om alle bestanden in een projectmap bij te houden via Gi
 Initialiseer je map als een node project, en koppel bijvoorbeeld webpack aan dit project:
 
 ```bash
-$ yarn init -y
-$ yarn add webpack --dev
+$ npm init -y
+$ npm install webpack --dev
 ```
 
 We zullen nu "per ongeluk" `node_modules` committen, en kijken om dit nadien recht te zetten.
@@ -411,18 +416,18 @@ We zullen nu "per ongeluk" `node_modules` committen, en kijken om dit nadien rec
 ```bash
 $ git add .
 $ git commit -m "initial project"
-[master (root-commit) 0b95e12] initial project
- 4284 files changed, 770604 insertions(+)
+[master 0ead6d0] initial project
+ 2435 files changed, 385719 insertions(+)
+ create mode 120000 node_modules/.bin/acorn
+ create mode 120000 node_modules/.bin/browserslist
+ create mode 120000 node_modules/.bin/terser
  ...
- create mode 120000 node_modules/.bin/webpack
- create mode 100644 node_modules/browserify/.npmignore
- create mode 100644 node_modules/browserify/.travis.yml
- create mode 100644 node_modules/browserify/LICENSE
- create mode 100644 node_modules/browserify/bin/advanced.txt
- create mode 100644 node_modules/browserify/bin/args.js
- create mode 100755 node_modules/browserify/bin/cmd.js
+ create mode 100644 node_modules/yocto-queue/license
+ create mode 100644 node_modules/yocto-queue/package.json
+ create mode 100644 node_modules/yocto-queue/readme.md
+ create mode 100644 package-lock.json
+ create mode 100644 package.json
 
- ...
  ```
 
 ### Bestanden wissen
@@ -432,13 +437,13 @@ Je hebt nu het volledige project, inclusief de `node_modules` toegevoegd aan je 
 Dit is overkill, het is niet nodig om de volledige dependency tree mee op te slaan in je git repository. We zullen deze fout nu rechtzetten:
 
 	$ git rm -r --cached node_modules/
+	rm 'node_modules/.bin/acorn'
+	rm 'node_modules/.bin/browserslist'
+	rm 'node_modules/.bin/terser'
 	rm 'node_modules/.bin/webpack'
-	rm 'node_modules/browserify/.npmignore'
-	rm 'node_modules/browserify/.travis.yml'
-	rm 'node_modules/browserify/LICENSE'
-	rm 'node_modules/browserify/bin/advanced.txt'
-	rm 'node_modules/browserify/bin/args.js'
-	rm 'node_modules/browserify/bin/cmd.js'
+	rm 'node_modules/@types/eslint-scope/LICENSE'
+	rm 'node_modules/@types/eslint-scope/README.md'
+
 	...
 
 De --cached optie zorgt ervoor dat de file gewist word uit de repository index, maar wel blijft staan in jouw filesysteem.
@@ -448,31 +453,22 @@ Een git status geeft nu het volgende resultaat:
 	$ git status
 	# On branch master
 	# Changes to be committed:
-	#   (use "git reset HEAD <file>..." to unstage)
+	#   (use "git restore --staged <file>..." to unstage)
 	#
+	#	deleted:    node_modules/.bin/acorn
+	#	deleted:    node_modules/.bin/browserslist
+	#	deleted:    node_modules/.bin/terser
 	#	deleted:    node_modules/.bin/webpack
-	#	deleted:    node_modules/browserify/.npmignore
-	#	deleted:    node_modules/browserify/.travis.yml
-	#	deleted:    node_modules/browserify/LICENSE
-	#	deleted:    node_modules/browserify/bin/advanced.txt
-	#	deleted:    node_modules/browserify/bin/args.js
-	#	deleted:    node_modules/browserify/bin/cmd.js
+	#	deleted:    node_modules/@types/eslint-scope/LICENSE
+	#	deleted:    node_modules/@types/eslint-scope/README.md
 	...
 
 Add & commit nu deze deletes, door de flag -A te gebruiken bij je add:
 
 	$ git add -A .
 	$ git commit -m "removed node_modules folder"
-	[master 62c973d] removed node_modules folder
-	 4269 files changed, 770405 deletions(-)
-	 delete mode 120000 node_modules/.bin/webpack
-	 delete mode 100644 node_modules/browserify/.npmignore
-	 delete mode 100644 node_modules/browserify/.travis.yml
-	 delete mode 100644 node_modules/browserify/LICENSE
-	 delete mode 100644 node_modules/browserify/bin/advanced.txt
-	 delete mode 100644 node_modules/browserify/bin/args.js
-	 delete mode 100755 node_modules/browserify/bin/cmd.js
-	 delete mode 100644 node_modules/browserify/bin/usage.txt
+	On branch master
+	nothing to commit, working tree clean
 
 ### Bestanden & mappen verwijderen uit je volledige historiek
 
@@ -481,8 +477,16 @@ We hebben zopas een commit aangemaakt, waarin deze `node_modules` opnieuw verwij
 Via het git `filter-branch` commando kun je de git historiek aanpassen. Om onze `node_modules` map te wissen, doen we het volgende:
 
 	$ git filter-branch --tree-filter 'rm -rf node_modules' HEAD
+	WARNING: git-filter-branch has a glut of gotchas generating mangled history
+	 rewrites.  Hit Ctrl-C before proceeding to abort, then use an
+	 alternative filtering tool such as 'git filter-repo'
+	 (https://github.com/newren/git-filter-repo/) instead.  See the
+	 filter-branch manual page for more details; to squelch this warning,
+	 set FILTER_BRANCH_SQUELCH_WARNING=1.
+	Proceeding with filter-branch...
 
-De map wordt gewist op je filesysteem én in de historiek. Let op, wanneer je via yarn opnieuw de `node_modules` koppelt, kun je ze per ongeluk opnieuw adden aan de historiek, wat niet de bedoeling is. We zullen dit vermijden met behulp van een `.gitignore` bestand.
+
+De map wordt gewist op je filesysteem én in de historiek. Let op, wanneer je via npm opnieuw de `node_modules` koppelt, kun je ze per ongeluk opnieuw adden aan de historiek, wat niet de bedoeling is. We zullen dit vermijden met behulp van een `.gitignore` bestand.
 
 ### .gitignore
 We zullen nu specifieren welke files we in de toekomst niet meer willen tracken. Dit kan mbv een `.gitignore` file. Dit is een tekstbestand in je repository dat specifieert welke bestanden en mappen genegeerd mogen worden door git.
