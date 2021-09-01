@@ -104,7 +104,7 @@ Maak een nieuwe map aan en maak hiervan een git repository (opmerking: de dollar
 	$ mkdir project
 	$ cd project
 	$ git init
-	Initialized empty Git repository in /Users/wouter/Documents/project/.git/
+	Initialized empty Git repository in /Users/frederikduchi/Documents/development3/project/.git/
 
 Het `git init` commando zal een verborgen map  met de naam .git aanmaken. Hierin zit alle informatie over de repository & z'n historiek.
 
@@ -113,7 +113,7 @@ Via het `git status` commando kun je wat meer informatie opvragen over de huidig
 	$ git status
 	# On branch master
 	#
-	# Initial commit
+	# No commits yet
 	#
 	nothing to commit (create/copy files and use "git add" to track)
 
@@ -128,7 +128,7 @@ Voer opnieuw het `git status` commando uit:
 	$ git status
 	# On branch master
 	#
-	# Initial commit
+	# No commits yet
 	#
 	# Untracked files:
 	#   (use "git add <file>..." to include in what will be committed)
@@ -142,7 +142,7 @@ Git laat ons weten dat er bestanden aanwezig zijn in je directory die nog niet b
 	$ git status
 	# On branch master
 	#
-	# Initial commit
+	# No commits yet
 	#
 	# Changes to be committed:
 	#   (use "git rm --cached <file>..." to unstage)
@@ -153,7 +153,7 @@ Git laat ons weten dat er bestanden aanwezig zijn in je directory die nog niet b
 Nu is git op de hoogte van die file. Dit wil nog niet zeggen dat git automatisch van elke wijziging aan die file een snapshot zal nemen. Je moet zelf beslissen wanneer je een snapshot zal nemen van de wijzigingen in je bestand(en) en deze wil toevoegen aan je git historiek. Dit doe je door een commit uit te voeren:
 
 	$ git commit -m "eerste commit"
-	[master (root-commit) 860a909] eerste commit
+	[master (root-commit) 5588c39] eerste commit
 	 1 file changed, 1 insertion(+)
 	 create mode 100644 hello.txt
 
@@ -168,7 +168,7 @@ Pas de inhoud van het bestand aan naar "hello devine", en voer het git status co
 	# On branch master
 	# Changes not staged for commit:
 	#   (use "git add <file>..." to update what will be committed)
-	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#   (use "git restore <file>..." to discard changes in working directory)
 	#
 	#	modified:   hello.txt
 	#
@@ -181,12 +181,12 @@ Git heeft gedetecteerd dat er wijzigingen zijn gebeurd aan een reeds getracked b
 Commit vervolgens deze wijzigingen:
 
 	$ git commit -m "world gewijzigd naar devine"
-	[master bd4b500] world gewijzigd naar devine
+	[master 7f65053] world gewijzigd naar devine
 	 1 file changed, 1 insertion(+), 1 deletion(-)
 
 Je kan natuurlijk ook meerdere wijzigingen in 1x adden en committen. Pas de tekst aan, en maak een tweede file aan:
 
-	$ echo "hello cp3" > hello.txt
+	$ echo "hello development 3" > hello.txt
 	$ echo "hello" > world.txt
 
 Git status zal nu 2 zaken rapporteren: het wijzigen van een reeds getrackte file, en het detecteren van een nieuwe file die nog niet getracked wordt:
@@ -195,7 +195,7 @@ Git status zal nu 2 zaken rapporteren: het wijzigen van een reeds getrackte file
 	# On branch master
 	# Changes not staged for commit:
 	#   (use "git add <file>..." to update what will be committed)
-	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#   (use "git restore <file>..." to discard changes in working directory)
 	#
 	#	modified:   hello.txt
 	#
@@ -211,7 +211,7 @@ Je kan nu deze twee zaken afzonderlijk stagen door 2x een git add uit te voeren,
 	$ git status
 	# On branch master
 	# Changes to be committed:
-	#   (use "git reset HEAD <file>..." to unstage)
+	#   (use "git restore --staged <file>..." to unstage)
 	#
 	#	modified:   hello.txt
 	#	new file:   world.txt
@@ -219,13 +219,14 @@ Je kan nu deze twee zaken afzonderlijk stagen door 2x een git add uit te voeren,
 
 Nu zijn beide gestaged voor commit, en kan je met 1 commit ze loggen in de git repository:
 
-	$ git commit -m "welcome cp3 + new world file"
+	$ git commit -m "welcome dev3 + new world file"
+	 [master 9720321] welcome dev3 + new world file
 	 2 files changed, 2 insertions(+), 1 deletion(-)
 	 create mode 100644 world.txt
 
 ### git add -A . ###
 
-We hebben al eerdere gezien dat je met `git add .` alle wijzigingen kunt stagen voor commit. Nu is het zo dat deletes (wissen van files) niet mee gestaged worden. Daarvoor moet je nog de flag -A toevoegen aan het commando.
+We hebben al eerder gezien dat je met `git add .` alle wijzigingen kunt stagen voor commit. Nu is het zo dat deletes (wissen van files) niet mee gestaged worden. Daarvoor moet je nog de flag -A toevoegen aan het commando.
 
 ## Wijzigingen ongedaan maken
 
