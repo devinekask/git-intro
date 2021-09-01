@@ -298,7 +298,7 @@ De file is nog steeds gewijzigd, maar de wijzigingen zijn niet meer gestaged:
 	#
 	no changes added to commit (use "git add" and/or "git commit -a")
 
-Je kunt deze nu definitief ongedaan maken, door - net zoals in voorgaande topic - git checkout te gebruiken:
+Je kunt deze nu definitief ongedaan maken, door - net zoals in voorgaande topic - git restore te gebruiken:
 
 	$ git restore hello.txt
 
