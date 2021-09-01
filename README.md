@@ -93,7 +93,7 @@ Je kan ook output van een commando wegschrijven naar een bestand, door gebruik t
 * `ls > test.txt` zal de output van het ls commando wegschrijven in een bestand met de naam test.txt.
 * `echo "hello world" > hello.txt` zal de output van het echo commando (de tekst "hello world") wegschrijven in een bestand met de naam hello.txt.
 
-Dit zijn enkele basiscommando's die je als je broekzak moet kennen. Dit is niets git-specifiek! Je zal deze commando's ook gebruiken wanneer je aan de slag gaat met Node.js en Webpack.
+Dit zijn enkele basiscommando's die je als je broekzak moet kennen. Dit is niets git-specifiek! Je zal deze commando's ook gebruiken wanneer je aan de slag gaat met Node.js en module bundlers zoals Gulp, Webpack of ViteJS.
 
 ### Aanmaken van een nieuwe git-repository
 
